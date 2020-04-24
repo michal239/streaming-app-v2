@@ -1,7 +1,7 @@
 language: node_js
 node_js: 
   - "stable"
-before_script: cd users-service
+before_install: cd users-service
 cache:
   directories:
     - "node_modules"
