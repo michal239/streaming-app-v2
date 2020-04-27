@@ -4,5 +4,7 @@ import setupDatabase from './setup/setupDatabase';
 
 const server = express();
 
+
+
 setupDatabase();
-server.listen(5000, console.log('server started on 5000'));
+server.listen(5000, console.log('Server started on 5000'));

@@ -7,4 +7,7 @@ async function makeHash(data) {
 
 const makeUser = buildMakeUser({ makeHash })
 
+export {
+  makeUser
+}
 export default makeUser;
