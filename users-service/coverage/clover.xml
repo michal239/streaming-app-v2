@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1588259853024" clover="3.2.0">
+  <project timestamp="1588259853024" name="All files">
+    <metrics statements="19" coveredstatements="19" conditionals="16" coveredconditionals="15" methods="7" coveredmethods="7" elements="42" coveredelements="41" complexity="0" loc="19" ncloc="19" packages="2" files="3" classes="3"/>
+    <package name="__test__.fixtures">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="user.js" path="C:\Users\Michał\Desktop\streaming-app-v2\users-service\__test__\fixtures\user.js">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="4" count="11" type="stmt"/>
+        <line num="10" count="11" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.entities">
+      <metrics statements="17" coveredstatements="17" conditionals="16" coveredconditionals="15" methods="6" coveredmethods="6"/>
+      <file name="index.js" path="C:\Users\Michał\Desktop\streaming-app-v2\users-service\src\entities\index.js">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+      </file>
+      <file name="user.js" path="C:\Users\Michał\Desktop\streaming-app-v2\users-service\src\entities\user.js">
+        <metrics statements="15" coveredstatements="15" conditionals="16" coveredconditionals="15" methods="5" coveredmethods="5"/>
+        <line num="2" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="8" count="12" type="stmt"/>
+        <line num="9" count="12" type="stmt"/>
+        <line num="10" count="12" type="stmt"/>
+        <line num="12" count="12" type="cond" truecount="2" falsecount="0"/>
+        <line num="13" count="11" type="cond" truecount="2" falsecount="0"/>
+        <line num="15" count="8" type="cond" truecount="2" falsecount="0"/>
+        <line num="16" count="7" type="cond" truecount="2" falsecount="0"/>
+        <line num="18" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="19" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="21" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="23" count="2" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="26" count="2" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>

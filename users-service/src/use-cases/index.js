@@ -6,7 +6,7 @@ import buildGetUser from './get-user';
 const addUser = buildAddUser({ usersDb });
 const getUser = buildGetUser({ usersDb });
 
-export default Object.freeze({
+export {
   addUser,
   getUser
-})
+}

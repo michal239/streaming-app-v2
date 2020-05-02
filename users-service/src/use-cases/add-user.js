@@ -8,7 +8,7 @@ export default function buildAddUser({ usersDb }) {
 
     if (emailExists || usernameExists) throw new Error('Username or email is taken');
 
-    return usersDb.insert({
+    return await usersDb.insert({
       username: user.getUsername(),
       email: user.getEmail(),
       password: user.getPassword()

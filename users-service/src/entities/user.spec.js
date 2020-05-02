@@ -92,7 +92,7 @@ describe('User entity', () => {
   });
 
   it('Throws an error when password is too short', async () => {
-    const user = makeFakeUser({ password: 'xyzxyz' });
+    const user = makeFakeUser({ password: 'x23XZ' });
     let error;
     try {
       await makeUser(user)
@@ -103,7 +103,7 @@ describe('User entity', () => {
   })
 
   it('Throws an error when password is too long', async () => {
-    const user = makeFakeUser({ password: 'above24characterslongpassword' });
+    const user = makeFakeUser({ password: 'above48charactersloXngpasswordppppppppppppppppppppppppppppppppppppppppppppppp' });
     let error;
     try {
       await makeUser(user)
