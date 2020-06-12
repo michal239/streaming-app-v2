@@ -19,13 +19,17 @@
     "@babel/core": "^7.9.0",
     "@babel/polyfill": "^7.8.7",
     "@babel/preset-env": "^7.9.5",
+    "@grpc/proto-loader": "^0.5.4",
     "babel-plugin-module-resolver": "^4.0.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "grpc": "^1.24.3",
+    "grpc-errors": "^1.1.4",
     "jest": "^25.4.0",
     "jsonwebtoken": "^8.5.1",
+    "mali": "^0.20.0",
     "mongoose": "^5.9.10"
   }
 }

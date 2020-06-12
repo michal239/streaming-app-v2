@@ -1,6 +1,6 @@
 export default function buildLoginUser({ getUser, HashService, TokenService }) {
   return async function loginUser(httpRequest) {
-    const { email, password } = httpRequest.body;
+    const { email, password } = httpRequest;
     try {
       if (!email || !password) throw new Error('Invalid email or password');
 

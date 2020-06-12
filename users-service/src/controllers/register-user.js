@@ -1,7 +1,7 @@
 export default function buildRegisterUser({ addUser }) {
   return async function registerUser(httpRequest) {
     try {
-      await addUser(httpRequest.body);
+      await addUser(httpRequest);
       return {
         statusCode: 200
       }
