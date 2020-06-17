@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "babel-watch -L src/index.js"
   },
   "keywords": [],
   "author": "",
@@ -13,7 +13,8 @@
     "@babel/core": "^7.10.2",
     "@babel/polyfill": "^7.10.1",
     "@babel/preset-env": "^7.10.2",
-    "babel-plugin-module-resolver": "^4.0.0"
+    "babel-plugin-module-resolver": "^4.0.0",
+    "mongoose": "^5.9.19"
   },
   "devDependencies": {
     "babel-watch": "^7.0.0"
