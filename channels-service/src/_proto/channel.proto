@@ -1,3 +1,26 @@
 syntax = "proto3";
 
 package channel;
+
+message userId {
+  String userId = 1;
+}
+
+message subscribeRequest {
+  String userId = 1;
+  String channelId = 2;
+}
+
+message channel {
+  String id = 1;
+  String userId = 2;
+  String streamKey = 3;
+  int32 views = 4;
+  common.Status status = 5;
+}
+
+service ChannelService {
+  rpc createChannel (userId) returns (channel);
+  rpc getChannel (channel) returns (channel);
+  rpc subscribeChannel (subscribeRequest) returns (channel);
+}
