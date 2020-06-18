@@ -2,11 +2,7 @@ syntax = "proto3";
 
 package channel;
 
-message userId {
-  String userId = 1;
-}
-
-message subscribeRequest {
+message channelRequest {
   String userId = 1;
   String channelId = 2;
 }
@@ -20,7 +16,7 @@ message channel {
 }
 
 service ChannelService {
-  rpc createChannel (userId) returns (channel);
-  rpc getChannel (channel) returns (channel);
-  rpc subscribeChannel (subscribeRequest) returns (channel);
+  rpc createChannel (channelRequest) returns (channel);
+  rpc getChannel (channelRequest) returns (channel);
+  rpc subscribeChannel (channelRequest) returns (channel);
 }
