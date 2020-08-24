@@ -10,10 +10,20 @@ mongoose.connect('mongodb://localhost/channels-service', {
 });
 
 
-import addChannel from './use-cases';
+import { editChannel, addChannel, addSubscription } from './use-cases';
+import { subscribeChannel } from './controllers';
 
-addChannel('5ea61bf7c2dd522894c69548').then(res => { console.log(res) })
 
+  addSubscription({channelId: '5eeb9a7aff576b08407d0f4f', userId: '5eebebe13aac7f1ab49cd8e6'}).then(res => console.log(res))
+  .catch(err => {
+    console.log(err.message)
+  })
+
+
+
+// subscribeChannel({userId:'5eebebe12aac7f1ab49cd8e6', channelId: '5eeb9a7aff576b08407d0f4f'})
+// // addChannel('5ea61bf7c2dd522894c69548').then(res => { console.log(res) })
+// editChannel('5eeb94912aac7f1ab49cd8e6')
 // const channel = makeChannel({userId: '201300'});
 // const chan = {
 //   userId: channel.getUserId(),

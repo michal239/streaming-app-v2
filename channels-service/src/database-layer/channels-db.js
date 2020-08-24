@@ -10,7 +10,11 @@ async function findOne(query) {
 }
 
 async function findById(id) {
-  return await Channel.find(id)
+  return await Channel.findById(id)
+}
+
+async function save(channel) {
+  await channel.save();
 }
 
 async function insert(channel) {
@@ -21,5 +25,6 @@ export default Object.freeze({
   find,
   findOne,
   findById,
+  save,
   insert
 })

@@ -15,8 +15,7 @@
     "@babel/preset-env": "^7.10.2",
     "babel-plugin-module-resolver": "^4.0.0",
     "mongoose": "^5.9.19",
-    "nanoid": "^3.1.10",
-    "shortid": "^2.2.15"
+    "nanoid": "^3.1.10"
   },
   "devDependencies": {
     "babel-watch": "^7.0.0"

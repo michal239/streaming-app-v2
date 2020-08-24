@@ -16,7 +16,7 @@ export default function buildAddChannel({ makeChannel, channelsDb }) {
       streamKey: channel.getStreamKey(),
       views: channel.getViews(),
       subscriptions: channel.getSubscriptions()
-    })
+    });
 
   }
 }
