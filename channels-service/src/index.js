@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import database from './database-layer/models/Channel';
-
+import path from 'path'
 mongoose.connect('mongodb://localhost/channels-service', {
   useUnifiedTopology: true,
   useNewUrlParser: true,
@@ -11,16 +11,22 @@ mongoose.connect('mongodb://localhost/channels-service', {
 
 
 import { editChannel, addChannel, addSubscription } from './use-cases';
-import { createChannel } from './controllers';
-
+import { createChannel, subscribeChannel } from './controllers';
+import App from './App';
 
   // addSubscription({channelId: '5eeb9a7aff576b08407d0f4f', userId: '5eebebe13aac7f1ab49cd8e6'}).then(res => console.log(res))
   // .catch(err => {
   //   console.log(err.message)
   // })
-
-  createChannel({userId: '' })
-
+import grpcCallback from './utils/grpcCallback';
+const services = {
+  createChannel: grpcCallback(createChannel),
+  subscribeChannel: grpcCallback(subscribeChannel)
+}
+const PROTO_PATH = path.resolve(__dirname, './_proto/channel.proto');
+const app = new App(PROTO_PATH, 'ChannelService', { server: { PORT: 3000, API_KEY: 'api' } })
+app.initServices(services);
+app.start();
 
 // subscribeChannel({userId:'5eebebe12aac7f1ab49cd8e6', channelId: '5eeb9a7aff576b08407d0f4f'})
 // // addChannel('5ea61bf7c2dd522894c69548').then(res => { console.log(res) })

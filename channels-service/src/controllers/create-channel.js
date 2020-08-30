@@ -4,15 +4,22 @@ export default function buildCreateChannel({ addChannel, getChannel }) {
     try {
       if (!userId) throw new Error('no user id')
       const channel = await addChannel(userId);
-
+      console.log(channel, 'czanel')
       return {
         statusCode: 200,
         body: {
-          channel
+          ...channel
         }
       }
     } catch (err) {
-      console.log(err)
+      return {
+        statusCode: 400,
+        body: {
+          error: {
+            message: err.message
+          }
+        }
+      }
     }
   }
 }

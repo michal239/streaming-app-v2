@@ -1,16 +1,16 @@
 syntax = "proto3";
 
 package channel;
-
+import "common.proto";
 message channelRequest {
-  String userId = 1;
-  String channelId = 2;
+  string userId = 1;
+  string channelId = 2;
 }
 
 message channel {
-  String id = 1;
-  String userId = 2;
-  String streamKey = 3;
+  string id = 1;
+  string userId = 2;
+  string streamKey = 3;
   int32 views = 4;
   common.Status status = 5;
 }
