@@ -11,14 +11,15 @@ mongoose.connect('mongodb://localhost/channels-service', {
 
 
 import { editChannel, addChannel, addSubscription } from './use-cases';
-import { subscribeChannel } from './controllers';
+import { createChannel } from './controllers';
 
 
-  addSubscription({channelId: '5eeb9a7aff576b08407d0f4f', userId: '5eebebe13aac7f1ab49cd8e6'}).then(res => console.log(res))
-  .catch(err => {
-    console.log(err.message)
-  })
+  // addSubscription({channelId: '5eeb9a7aff576b08407d0f4f', userId: '5eebebe13aac7f1ab49cd8e6'}).then(res => console.log(res))
+  // .catch(err => {
+  //   console.log(err.message)
+  // })
 
+  createChannel({userId: '' })
 
 
 // subscribeChannel({userId:'5eebebe12aac7f1ab49cd8e6', channelId: '5eeb9a7aff576b08407d0f4f'})

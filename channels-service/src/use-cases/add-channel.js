@@ -1,5 +1,7 @@
 export default function buildAddChannel({ makeChannel, channelsDb }) {
   return async function addChannel(userId) {
+    const userHasChannel = await channelsDb.findOne({ userId });
+    if (userHasChannel) throw new Error('jdjd')
 
     const INITIAL_STATE = {
       views: 0,
