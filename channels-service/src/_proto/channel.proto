@@ -19,4 +19,5 @@ service ChannelService {
   rpc createChannel (channelRequest) returns (channel);
   rpc getChannel (channelRequest) returns (channel);
   rpc subscribeChannel (channelRequest) returns (channel);
+  rpc unsubscribeChannel (channelRequest) returns (channel);
 }
