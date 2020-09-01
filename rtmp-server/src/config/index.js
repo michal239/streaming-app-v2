@@ -1,5 +1,5 @@
 const rtmpDev = {
-  logType: 3,
+  logType: 1,
 
   rtmp: {
     port: 1935,
@@ -22,5 +22,15 @@ const rtmpDev = {
             hlsFlags: '[hls_time=2:hls_list_size=3:hls_flags=delete_segments]'
         }
     ]
+  }
+}
+
+if(process.env.NODE_ENV === "production") {
+  module.exports = {
+      
+  }
+} else {
+  module.exports = {
+      rtmp_server: rtmpDev
   }
 }
