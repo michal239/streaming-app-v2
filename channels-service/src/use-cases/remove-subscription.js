@@ -12,4 +12,4 @@ export default function buildRemoveSubscription({ channelsDb }) {
 
     return channel;
   }
-}
+} 
