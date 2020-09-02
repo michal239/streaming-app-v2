@@ -13,7 +13,9 @@
     "@babel/core": "^7.11.5",
     "@babel/polyfill": "^7.11.5",
     "@babel/preset-env": "^7.11.5",
+    "@grpc/proto-loader": "^0.5.5",
     "babel-plugin-module-resolver": "^4.0.0",
+    "grpc": "^1.24.3",
     "node-media-server": "^2.2.2"
   },
   "devDependencies": {

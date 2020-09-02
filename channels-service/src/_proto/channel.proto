@@ -5,6 +5,7 @@ import "common.proto";
 message channelRequest {
   string userId = 1;
   string channelId = 2;
+  string streamKey = 3;
 }
 
 message channel {
