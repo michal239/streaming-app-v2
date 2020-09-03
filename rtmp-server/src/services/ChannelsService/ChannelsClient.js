@@ -1,5 +1,6 @@
 import grpc from 'grpc';
-const protoLoader = require('@grpc/proto-loader');
+import * as protoLoader from '@grpc/proto-loader';
+
 
 const PROTO_PATH = __dirname + '../../../../../channels-service/src/_proto/channel.proto';
 
