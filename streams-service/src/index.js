@@ -2,7 +2,9 @@ import App from './App'
 import path from 'path'
 import addStream from './controllers/addStream';
 import removeStream from './controllers/removeStream';
+import updateViewers from './jobs/updateViewers';
 
+updateViewers.start();
 
 const services = {
   addStream,
