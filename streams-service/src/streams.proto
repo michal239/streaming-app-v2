@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package streams;
+
+message emptyResponse {
+
+}
+
+message streamRequest {
+  string streamKey = 1;
+}
+
+service StreamsService {
+  rpc addStream (streamRequest) returns (emptyResponse);
+  rpc removeStream (streamRequest) returns (emptyResponse);
+}
