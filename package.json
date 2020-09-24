@@ -16,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/king-leonidas1337/streaming-app-v2/issues"
   },
-  "homepage": "https://github.com/king-leonidas1337/streaming-app-v2#readme"
+  "homepage": "https://github.com/king-leonidas1337/streaming-app-v2#readme",
+  "dependencies": {
+    "module-alias": "^2.2.2"
+  },
+  "_moduleAliases": {
+    "@root": "."
+  }
 }
