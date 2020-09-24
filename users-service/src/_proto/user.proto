@@ -20,7 +20,7 @@ message emptyResponse {
   Status status = 1;
 }
 
-service UserService {
+service UsersService {
   rpc register (User) returns (emptyResponse);
   rpc login (User) returns (Token);
 }

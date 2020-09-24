@@ -1,7 +1,9 @@
 syntax = "proto3";
 
 package channel;
+
 import "common.proto";
+
 message channelRequest {
   string userId = 1;
   string channelId = 2;

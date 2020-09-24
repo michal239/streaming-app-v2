@@ -21,7 +21,7 @@ const services = {
   login: grpcCallback(loginUser),
   register: grpcCallback(registerUser)
 }
-const app = new App(PROTO_PATH, 'UserService', { server: { PORT: 3000, API_KEY: 'api' } });
+const app = new App(PROTO_PATH, 'UsersService', { server: { PORT: 3000, API_KEY: 'api' } });
 app.initMiddleware(checkSource);
 app.initServices(services);
 app.start();

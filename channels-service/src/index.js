@@ -26,7 +26,7 @@ const services = {
   getChannel: grpcCallback(getChannel)
 }
 const PROTO_PATH = path.resolve(__dirname, './_proto/channel.proto');
-const app = new App(PROTO_PATH, 'ChannelService', { server: { PORT: 3001, API_KEY: 'api' } })
+const app = new App(PROTO_PATH, 'ChannelsService', { server: { PORT: 3001, API_KEY: 'api' } })
 app.initServices(services);
 app.start();
 
