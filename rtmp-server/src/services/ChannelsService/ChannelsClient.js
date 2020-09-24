@@ -14,6 +14,6 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
 
 const channelProto = grpc.loadPackageDefinition(packageDefinition).channel;
 
-const ChannelsClient = new channelProto.ChannelService('localhost:3000', grpc.credentials.createInsecure());
+const ChannelsClient = new channelProto.ChannelService('localhost:3001', grpc.credentials.createInsecure());
 
 export default ChannelsClient;
