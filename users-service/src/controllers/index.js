@@ -2,6 +2,7 @@ import buildRegisterUser from './register-user';
 import buildLoginUser from './login-user';
 import buildFind from './find';
 import buildFindOne from './find-one';
+import buildFindById from './find-by-id';
 
 import { addUser, getUser, getUsers } from '../use-cases';
 
@@ -12,10 +13,12 @@ const registerUser = buildRegisterUser({ addUser });
 const loginUser = buildLoginUser({ getUser, HashService, TokenService });
 const find = buildFind({ getUsers })
 const findOne = buildFindOne({ getUser });
+const findById = buildFindById({ getUser });
 
 export {
   registerUser,
   loginUser,
   find,
-  findOne
+  findOne,
+  findById
 }
