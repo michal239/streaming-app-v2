@@ -2,7 +2,7 @@ require('dotenv').config()
 // import express from 'express';
 
 import setupDatabase from './setup/setupDatabase';
-import { registerUser, loginUser, findOne } from './controllers';
+import { registerUser, loginUser, find, findOne } from './controllers';
 // import makeCallback from './helpers/express-callback';
 // import bodyParser from 'body-parser';
 import path from 'path';
@@ -20,6 +20,7 @@ const PROTO_PATH = path.resolve(__dirname, '../../_proto/user.proto');
 const services = {
   login: grpcCallback(loginUser),
   register: grpcCallback(registerUser),
+  find: grpcCallback(find),
   findOne: grpcCallback(findOne)
 }
 const app = new App(PROTO_PATH, 'UsersService', { server: { PORT: 3000, API_KEY: 'api' } });

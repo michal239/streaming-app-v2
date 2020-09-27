@@ -26,11 +26,21 @@ message FindOneRequest {
 
 message FindOneResponse {
   User user = 1;
-  Status status =2;
+  Status status = 2;
+}
+
+message FindRequest {
+  string query = 1;
+}
+
+message FindResponse {
+  repeated User users = 1;
+  Status status = 2;
 }
 
 service UsersService {
   rpc register (User) returns (emptyResponse);
   rpc login (User) returns (Token);
   rpc findOne (FindOneRequest) returns (FindOneResponse);
+  rpc find (FindRequest) returns (FindResponse);
 }
