@@ -20,7 +20,17 @@ message emptyResponse {
   Status status = 1;
 }
 
+message FindOneRequest {
+  string query = 1;
+}
+
+message FindOneResponse {
+  User user = 1;
+  Status status =2;
+}
+
 service UsersService {
   rpc register (User) returns (emptyResponse);
   rpc login (User) returns (Token);
+  rpc findOne (FindOneRequest) returns (FindOneResponse);
 }
