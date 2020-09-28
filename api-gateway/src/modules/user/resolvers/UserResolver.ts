@@ -1,4 +1,4 @@
-import { Resolver, Query, Arg } from 'type-graphql';
+import { Resolver, Query, Arg, Mutation } from 'type-graphql';
 import UsersClient from '../../../microservices/UsersService/UsersClient'
 import { User } from '../entity/User';
 
@@ -10,7 +10,25 @@ export class UserResolver {
   ): Promise<User | null> {
     const query = JSON.stringify({email: email});
     const user = await UsersClient.findOne({ query });
-    console.log(user)
     return user;
   }
-}
+
+  @Mutation(() => String)
+  async login(
+    @Arg('email') email: string,
+    @Arg('password') password: string
+  ): Promise<string> {
+    const token = await UsersClient.login({ email, password });
+    return token;
+  }
+
+  @Mutation(() => User)
+  async register(
+    @Arg('username') username: string,
+    @Arg('email') email: string,
+    @Arg('password') password: string
+  ): Promise<User> {
+    const user = await UsersClient.register({ username, email, password });
+    return user;
+  }
+};

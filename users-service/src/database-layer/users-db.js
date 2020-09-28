@@ -14,7 +14,7 @@ async function findById(id) {
 }
 
 async function insert(user) {
-  await User.create(user);
+  return await User.create(user);
 }
 
 export default Object.freeze({

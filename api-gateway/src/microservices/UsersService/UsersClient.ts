@@ -35,7 +35,7 @@ function login(data: ILoginData, metadata?: IMetadata): Promise<string> {
   })
 }
 
-function register(data: IRegisterData, metadata?: IMetadata): Promise<User | null> {
+function register(data: IRegisterData, metadata?: IMetadata): Promise<User> {
   return new Promise((resolve, reject) => {
     const meta = generateMetadata(metadata);
     UsersClient.register(data, meta, (err: any, res: any) => {
@@ -44,6 +44,7 @@ function register(data: IRegisterData, metadata?: IMetadata): Promise<User | nul
       } else if (res.status.failed) {
         reject(new RequestFailedError(res.status))
       } else {
+        console.log(res)
         resolve(res.user)
       }
     })
@@ -53,9 +54,7 @@ function register(data: IRegisterData, metadata?: IMetadata): Promise<User | nul
 function findOne(data: any, metadata?: IMetadata): Promise<User | null> {
   return new Promise((resolve, reject) => {
     const meta = generateMetadata(metadata);
-
     UsersClient.findOne(data, meta, (err: any, res: any) => {
-      console.log(res)
       if (err) {
         reject(err)
       } else if (res.status.failed) {

@@ -1,9 +1,12 @@
 export default function buildRegisterUser({ addUser }) {
   return async function registerUser(httpRequest) {
     try {
-      await addUser(httpRequest);
+      const user = await addUser(httpRequest);
       return {
-        statusCode: 200
+        statusCode: 200,
+        body: {
+          user
+        }
       }
     } catch (err) {
       return {
