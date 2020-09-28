@@ -1,15 +1,22 @@
 require('module-alias/register')
+import express from 'express';
+import { ApolloServer } from 'apollo-server-express';
+import { buildSchema } from 'type-graphql';
 
-import UsersClient from './microservices/UsersService/UsersClient';
-import ChannelsClient from './microservices/ChannelsService/ChannelsClient';
+const main = async () => {
+  const app = express();
 
-async function main() {
-  try {
-    const res = await ChannelsClient.createChannel({ userId: '5f6cd1d12fbe0406f8c6b7b8' });
-    console.log(res);
-  } catch (error) {
-    console.log(error);
-  }
+  const schema = await buildSchema({
+    resolvers: []
+  })
+  
+  const apolloServer = new ApolloServer({
+    schema
+  })
+
+  apolloServer.applyMiddleware({ app })
+
+  app.listen(8000, ()=>console.log('Server started on port 8000'));
 }
 
-main()
+main();
