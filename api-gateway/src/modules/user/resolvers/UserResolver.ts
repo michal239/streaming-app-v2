@@ -13,6 +13,15 @@ export class UserResolver {
     return user;
   }
 
+  @Query(() => [User])
+  async users(
+    @Arg('query') query: string
+  ): Promise<Array<User>> {
+    const stringifiedQuery = JSON.stringify({ gender: query })
+    const users = await UsersClient.find({query: stringifiedQuery});
+    return users;
+  }
+
   @Mutation(() => String)
   async login(
     @Arg('email') email: string,

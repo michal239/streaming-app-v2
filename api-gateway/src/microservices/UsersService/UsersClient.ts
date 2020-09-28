@@ -44,8 +44,22 @@ function register(data: IRegisterData, metadata?: IMetadata): Promise<User> {
       } else if (res.status.failed) {
         reject(new RequestFailedError(res.status))
       } else {
-        console.log(res)
         resolve(res.user)
+      }
+    })
+  })
+}
+
+function find(data: any, metadata?: IMetadata): Promise<Array<User>> {
+  return new Promise((resolve, reject) => {
+    const meta = generateMetadata(metadata);
+    UsersClient.find(data, meta, (err: any, res: any) => {
+      if (err) {
+        reject(err)
+      } else if (res.status.failed) {
+        reject(new RequestFailedError(res.status))
+      } else {
+        resolve(res.users)
       }
     })
   })
@@ -80,5 +94,6 @@ function generateMetadata(metadata?: IMetadata) {
 export default Object.freeze({
   login,
   register,
+  find,
   findOne
 });
