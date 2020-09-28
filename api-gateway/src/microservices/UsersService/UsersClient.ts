@@ -3,6 +3,8 @@ import * as protoLoader from '@grpc/proto-loader';
 
 import { ILoginData, IRegisterData } from '@ts/interfaces/UsersClient.interface'
 import { User } from '../../modules/user/entity/User';
+import { IMetadata } from '@ts/interfaces/Metadata.interface'
+import { RequestFailedError } from '../../utils/errors'
 
 const PROTO_PATH = __dirname + '../../../../../_proto/user.proto';
 
@@ -18,42 +20,62 @@ const userProto: any = grpc.loadPackageDefinition(packageDefinition).user;
 
 const UsersClient = new userProto.UsersService('localhost:3000', grpc.credentials.createInsecure());
 
-function login(data: ILoginData) {
+function login(data: ILoginData, metadata?: IMetadata): Promise<string> {
   return new Promise((resolve, reject) => {
-    UsersClient.login(data, (err: any, res: any) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(res);
-      }
-    })
-  })
-}
-
-function register(data: IRegisterData) {
-  return new Promise((resolve, reject) => {
-    UsersClient.register(data, (err: any, res: any) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(res);
-      }
-    })
-  })
-}
-
-function findOne(data: any): Promise<User | null> {
-  return new Promise((resolve, reject) => {
-    const meta = new grpc.Metadata();
-    meta.add('x-api-key', 'replacdethislater');
-    UsersClient.findOne(data, meta, (err: any, res: any) => {
+    const meta = generateMetadata(metadata);
+    UsersClient.login(data, meta, (err: any, res: any) => {
       if (err) {
         reject(err)
+      } else if (res.status.failed) {
+        reject(new RequestFailedError(res.status))
+      } else {
+        resolve(res.token)
+      }
+    })
+  })
+}
+
+function register(data: IRegisterData, metadata?: IMetadata): Promise<User | null> {
+  return new Promise((resolve, reject) => {
+    const meta = generateMetadata(metadata);
+    UsersClient.register(data, meta, (err: any, res: any) => {
+      if (err) {
+        reject(err)
+      } else if (res.status.failed) {
+        reject(new RequestFailedError(res.status))
       } else {
         resolve(res.user)
       }
     })
   })
+}
+
+function findOne(data: any, metadata?: IMetadata): Promise<User | null> {
+  return new Promise((resolve, reject) => {
+    const meta = generateMetadata(metadata);
+
+    UsersClient.findOne(data, meta, (err: any, res: any) => {
+      console.log(res)
+      if (err) {
+        reject(err)
+      } else if (res.status.failed) {
+        reject(new RequestFailedError(res.status))
+      } else {
+        resolve(res.user)
+      }
+    })
+  })
+}
+
+function generateMetadata(metadata?: IMetadata) {
+  const meta = new grpc.Metadata();
+  meta.add('x-api-key', 'replacethislater');
+  if (metadata) {
+    for (let key in metadata) {
+      meta.add(key, metadata[key]);
+    }
+  }
+  return meta;
 }
 
 export default Object.freeze({
