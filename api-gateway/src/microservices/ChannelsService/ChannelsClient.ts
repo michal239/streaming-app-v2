@@ -1,7 +1,8 @@
 import grpc from 'grpc';
 import * as protoLoader from '@grpc/proto-loader';
 
-import { ICreateChannelData } from '@ts/interfaces/ChannelsClient.interface'
+import { ICreateChannelData } from '@ts/interfaces/ChannelsClient.interface';
+import { Channel } from '../../modules/channel/entity/Channel'
 
 const PROTO_PATH = __dirname + '../../../../../_proto/channel.proto';
 
@@ -29,7 +30,7 @@ function createChannel(data: ICreateChannelData) {
   })
 }
 
-function findOne(data:any) {
+function findOne(data:any): Promise<Channel | null> {
   return new Promise((resolve, reject) => {
     ChannelsClient.findOne(data, (err:any, res:any) => {
       if (err) {

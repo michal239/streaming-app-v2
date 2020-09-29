@@ -42,7 +42,7 @@ message FindOneRequest {
   string query = 1;
 }
 message FindOneResponse {
-  channel Channel = 1;
+  Channel channel = 1;
   common.Status status = 2;
 }
 

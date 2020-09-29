@@ -1,6 +1,15 @@
 import { ObjectType, Field } from 'type-graphql';
 
 @ObjectType()
+export class Subscriptions {
+  @Field()
+  count: number;
+
+  @Field(() => [String])
+  subscribers: Array<string>;
+}
+
+@ObjectType()
 export class Channel {
   @Field()
   id: string;
@@ -16,13 +25,4 @@ export class Channel {
 
   @Field()
   streamKey: string;
-}
-
-@ObjectType()
-export class Subscriptions {
-  @Field()
-  count: number;
-
-  @Field()
-  subscribers: Array<string>;
 }

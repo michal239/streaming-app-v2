@@ -1,8 +1,10 @@
-import { Resolver, Query, Arg, Mutation } from 'type-graphql';
+import { Resolver, Query, Arg, Mutation, FieldResolver, Root } from 'type-graphql';
 import UsersClient from '../../../microservices/UsersService/UsersClient'
 import { User } from '../entity/User';
+import { Channel } from '../../channel/entity/Channel';
+import ChannelsClient from '../../../microservices/ChannelsService/ChannelsClient';
 
-@Resolver()
+@Resolver(() => User)
 export class UserResolver {
   @Query(() => User, { nullable: true })
   async user(
@@ -20,6 +22,15 @@ export class UserResolver {
     const stringifiedQuery = JSON.stringify({ gender: query })
     const users = await UsersClient.find({query: stringifiedQuery});
     return users;
+  }
+
+  @FieldResolver(() => Channel, { nullable: true })
+  async channel(
+    @Root() user: User
+  ): Promise<Channel | null> {
+    const query = JSON.stringify({ userId: user.id })
+    const channel = await ChannelsClient.findOne({ query });
+    return channel;
   }
 
   @Mutation(() => String)
