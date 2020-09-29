@@ -8,7 +8,7 @@ export default function buildCreateChannel({ addChannel, getChannel }) {
       return {
         statusCode: 200,
         body: {
-          ...channel
+          channel
         }
       }
     } catch (err) {
