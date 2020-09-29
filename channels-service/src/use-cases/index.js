@@ -8,13 +8,13 @@ import makeChannel from '../entities';
 import channelsDb from '../database-layer/channels-db';
 
 const addChannel = buildAddChannel({ makeChannel, channelsDb });
-const getChannelUC = buildGetChannel({ channelsDb });
+const getChannel = buildGetChannel({ channelsDb });
 const addSubscription = buildAddSubscription({ channelsDb });
 const removeSubscription = buildRemoveSubscription({ channelsDb });
 
 export {
   addChannel,
-  getChannelUC,
+  getChannel,
   addSubscription,
   removeSubscription
 };

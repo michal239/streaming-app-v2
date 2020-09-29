@@ -29,6 +29,19 @@ function createChannel(data: ICreateChannelData) {
   })
 }
 
+function findOne(data:any) {
+  return new Promise((resolve, reject) => {
+    ChannelsClient.findOne(data, (err:any, res:any) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(res.channel);
+      }
+    })
+  })
+}
+
 export default Object.freeze({
-  createChannel
+  createChannel,
+  findOne
 })

@@ -11,7 +11,7 @@ mongoose.connect('mongodb://localhost/channels-service', {
 
 
 import { editChannel, addChannel, addSubscription } from './use-cases';
-import { createChannel, subscribeChannel, unsubscribeChannel, getChannel } from './controllers';
+import { createChannel, subscribeChannel, unsubscribeChannel, findOne } from './controllers';
 import App from './App';
 
   // addSubscription({channelId: '5eeb9a7aff576b08407d0f4f', userId: '5eebebe13aac7f1ab49cd8e6'}).then(res => console.log(res))
@@ -23,9 +23,9 @@ const services = {
   createChannel: grpcCallback(createChannel),
   subscribeChannel: grpcCallback(subscribeChannel),
   unsubscribeChannel: grpcCallback(unsubscribeChannel),
-  getChannel: grpcCallback(getChannel)
+  findOne: grpcCallback(findOne)
 }
-const PROTO_PATH = path.resolve(__dirname, './_proto/channel.proto');
+const PROTO_PATH = path.resolve(__dirname, '../../_proto/channel.proto');
 const app = new App(PROTO_PATH, 'ChannelsService', { server: { PORT: 3001, API_KEY: 'api' } })
 app.initServices(services);
 app.start();
