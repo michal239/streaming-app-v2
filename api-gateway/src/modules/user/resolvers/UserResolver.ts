@@ -49,6 +49,7 @@ export class UserResolver {
     @Arg('password') password: string
   ): Promise<User> {
     const user = await UsersClient.register({ username, email, password });
+    await ChannelsClient.createChannel({ userId: user.id });
     return user;
   }
 };

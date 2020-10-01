@@ -20,7 +20,7 @@ const channelProto: any = grpc.loadPackageDefinition(packageDefinition).channel;
 
 const ChannelsClient = new channelProto.ChannelsService('localhost:3001', grpc.credentials.createInsecure());
 
-function createChannel(data: ICreateChannelData, metadata?: IMetadata) {
+function createChannel(data: ICreateChannelData, metadata?: IMetadata): Promise<Channel> {
   return new Promise((resolve, reject) => {
     const meta = generateMetadata(metadata);
     ChannelsClient.createChannel(data, meta, (err: any, res: any) => {

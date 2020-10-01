@@ -2,9 +2,10 @@ export default function buildCreateChannel({ addChannel, getChannel }) {
   return async function createChannel(httpRequest) {
     const { userId } = httpRequest;
     try {
-      if (!userId) throw new Error('no user id')
+      if (!userId) throw new Error('no user id');
+      
       const channel = await addChannel(userId);
-      console.log(channel, 'czanel')
+
       return {
         statusCode: 200,
         body: {
