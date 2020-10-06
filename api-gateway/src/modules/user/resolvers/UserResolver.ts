@@ -8,9 +8,10 @@ import ChannelsClient from '../../../microservices/ChannelsService/ChannelsClien
 export class UserResolver {
   @Query(() => User, { nullable: true })
   async user(
-    @Arg('email') email: string
+    @Arg('key') key: string,
+    @Arg('value') value: string
   ): Promise<User | null> {
-    const query = JSON.stringify({email: email});
+    const query = JSON.stringify({ [key]: value });
     const user = await UsersClient.findOne({ query });
     return user;
   }

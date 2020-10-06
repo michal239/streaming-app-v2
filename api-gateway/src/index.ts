@@ -4,9 +4,11 @@ import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
 import { UserResolver } from './modules/user/resolvers/UserResolver'
+import cors from 'cors';
+
 const main = async () => {
   const app = express();
-
+  app.use(cors())
   const schema = await buildSchema({
     resolvers: [UserResolver]
   })
@@ -17,7 +19,7 @@ const main = async () => {
 
   apolloServer.applyMiddleware({ app });
 
-  app.listen(8000, ()=>console.log('Server started on port 8000'));
+  app.listen(7000, ()=>console.log('Server started on port 7000'));
 }
 
 main();
