@@ -1,3 +1,5 @@
+@import './grid.scss';
+
 html {
   --color-main-white: white;
   --color-main-black: black;
@@ -12,4 +14,33 @@ html {
   --color-opacity25: rgba(0, 0, 0, 0.25);
   --color-opacity50: rgba(0, 0, 0, 0.50);
   --color-opacity75: rgba(0, 0, 0, 0.75);
+}
+
+body {
+  font-family: 'Courier New', Courier, monospace;
+  margin: 0;
+  background-color: var(--color-main-lightgrey)
+}
+
+h2 {
+  color: var(--color-main-dark);
+  cursor: pointer;
+}
+
+h2:hover {
+  color: var(--color-main-blue);
+}
+
+::-webkit-scrollbar {
+  width: 2px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--color-main-lightgrey); 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--color-main-black); 
 }
