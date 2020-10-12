@@ -16,6 +16,7 @@ nms.on('prePublish', (id, StreamPath, args) => {
     } else {
       StreamsClient.addStream({ streamKey }, function(err,res) {
         if (err) {
+          console.log(err)
           const session = nms.getSession(id);
           session.reject();
         }

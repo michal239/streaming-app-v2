@@ -15,7 +15,7 @@ const Navbar: React.FC = () => {
     }
   }, [])
   
-  let previousScrollValue = 0;
+  let previousScrollValue = 0; //a way better performance vs useState
   const handleScroll = () => {
     if (window.scrollY > previousScrollValue && window.scrollY > 60) {
       if(navbar.current) navbar.current.classList.add('hidden')
@@ -47,7 +47,7 @@ const Navbar: React.FC = () => {
           </div>
         </div>
         <div className="navbar__item navbar__item--back container">
-          <div className="row">
+          <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}} className="row">
             <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}} className="col-8">
               <i className="fas fa-search"></i>
               <SearchBar />

@@ -1,0 +1,18 @@
+.channel-info {
+  padding: 10px 20px;
+  color: var(--color-main-dark);
+
+  .channel-info__stream-info {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .channel-info__username {
+    margin: 0;
+    font-size: 24px;
+  }
+  .channel-info__subscriptions {
+    color: var(--color-main-grey);
+    font-size: 12px;
+  }
+}

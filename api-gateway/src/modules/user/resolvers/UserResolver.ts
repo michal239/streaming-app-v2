@@ -3,6 +3,8 @@ import UsersClient from '../../../microservices/UsersService/UsersClient'
 import { User } from '../entity/User';
 import { Channel } from '../../channel/entity/Channel';
 import ChannelsClient from '../../../microservices/ChannelsService/ChannelsClient';
+import { Stream } from '../../stream/entity/Stream';
+import StreamsClient from '../../../microservices/StreamsService/StreamsClient';
 
 @Resolver(() => User)
 export class UserResolver {
@@ -32,6 +34,16 @@ export class UserResolver {
     const query = JSON.stringify({ userId: user.id })
     const channel = await ChannelsClient.findOne({ query });
     return channel;
+  }
+
+  @FieldResolver(() => Stream, { nullable: true })
+  async stream(
+    @Root() user: User
+  ): Promise<Stream | null> {
+    const query = JSON.stringify({ userId: user.id })
+    const channel = await ChannelsClient.findOne({ query });
+    const stream = await StreamsClient.getStream({ streamKey: channel?.streamKey });
+    return stream;
   }
 
   @Mutation(() => String)
