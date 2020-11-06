@@ -13,13 +13,20 @@ const rtmpDev = {
     mediaroot: './mediaserver/media',
     allow_origin: '*'
   },
+  auth: {
+    play: true,
+    publish: true,
+    secret: 'nodemedia2017privatekey'
+  },
   trans: {
     ffmpeg: './ffmpeg/bin/ffmpeg.exe',
     tasks: [
         {
             app: 'live',
             hls: true,
-            hlsFlags: '[hls_time=2:hls_list_size=3:hls_flags=delete_segments]',
+            
+            dash: true,
+            dashFlags: '[f=dash:window_size=3:extra_window_size=5]',
             flv: true
         }
     ]
@@ -32,6 +39,6 @@ if(process.env.NODE_ENV === "production") {
   }
 } else {
   module.exports = {
-      rtmp_server: rtmpDev
+    rtmp_server: rtmpDev
   }
 }

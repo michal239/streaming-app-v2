@@ -6,7 +6,10 @@ export const useForm = (initialValues: any) => {
   return [values, (e: React.ChangeEvent<HTMLInputElement>) => {
     setValues({
       ...values,
-      [e.target.name]: e.target.value
+      [e.target.name]: {
+        value: e.target.value,
+        touched: true
+      }
     })
   }]
 }

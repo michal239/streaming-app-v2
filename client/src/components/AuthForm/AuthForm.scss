@@ -1,0 +1,32 @@
+.auth-form {
+  border-radius: 4px;
+  padding: 40px 20px;
+  background-color: white;
+  position: relative;
+  .auth-form__close-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    &:hover {
+      color: var(--color-main-blue);
+    }
+  }
+
+  .auth-form__submit-btn {
+    font-weight: 700;
+    color: white;
+    height: 30px;
+    border: 0;
+    border-radius: 4px;
+    background-color: var(--color-main-blue);
+    width: 100%;
+    cursor: pointer;
+    &:disabled {
+      color:grey;
+      background-color: rgba(0,0,0,0.1);
+      cursor: not-allowed;
+    }
+  }
+}
