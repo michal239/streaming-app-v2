@@ -13,11 +13,11 @@ const rtmpDev = {
     mediaroot: './mediaserver/media',
     allow_origin: '*'
   },
-  auth: {
-    play: true,
-    publish: true,
-    secret: 'nodemedia2017privatekey'
-  },
+  // auth: {
+  //   play: true,
+  //   publish: true,
+  //   secret: 'nodemedia2017privatekey'
+  // },
   trans: {
     ffmpeg: './ffmpeg/bin/ffmpeg.exe',
     tasks: [
