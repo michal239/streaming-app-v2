@@ -6,6 +6,8 @@ import Homepage from './pages/Homepage/Homepage';
 import ChannelPage from './pages/ChannelPage/ChannelPage';
 
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import store from './store';
+import { Provider as ReduxProvider } from 'react-redux';
 
 const client = new ApolloClient({
   uri: 'http://localhost:7000/graphql',
@@ -15,13 +17,15 @@ const client = new ApolloClient({
 const App = () => {
   return (
     <>
-      <Router>
-        <ApolloProvider client={client}>
-          <Navbar />
-          <Route path="/" exact component={Homepage} />
-          <Route path="/:username" exact component={ChannelPage} />
-        </ApolloProvider>
-      </Router>
+      <ApolloProvider client={client}>
+        <ReduxProvider store={store}>
+          <Router>
+            <Navbar />
+            <Route path="/" exact component={Homepage} />
+            <Route path="/:username" exact component={ChannelPage} />
+          </Router>
+        </ReduxProvider>
+      </ApolloProvider>
     </>
   )
 }

@@ -1,7 +1,8 @@
 import React, { useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import "./Navbar.scss";
 
-
+import Logo from '../../icons/Logo';
 import AuthButtons from '../../components/AuthButtons/AuthButtons';
 import SearchBar from '../../components/SearchBar/SearchBar';
 const Navbar: React.FC = () => {
@@ -38,7 +39,9 @@ const Navbar: React.FC = () => {
         <div className="navbar__item navbar__item--front container">
           <div className="row">
             <div style={{display: 'flex'}} className="col-12 space-between">
-              LOGO
+              <Link to="/">
+                <Logo />
+              </Link>
               <nav className="navbar__navigation-wraper">
                 <i onClick={() => changeView()} className="fas fa-search navbar__search-icon"></i>
                 <AuthButtons />

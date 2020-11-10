@@ -2,9 +2,12 @@ import React from 'react';
 import './Chat.scss';
 
 const Chat: React.FC = () => {
+  const [message, addMsg] = React.useState(['siemka']);
+  const [input, setInput] = React.useState('');
   function handleSubmit(e:any) {
     e.preventDefault();
-    console.log(e)
+    addMsg(current => [...current, input]);
+    setInput('');
   }
 
   return (
@@ -13,10 +16,12 @@ const Chat: React.FC = () => {
 
       </div>
       <div className="chat__messages">
-
+      {message.map(msg => {
+        return <div>{msg}</div>
+      })}
       </div>
       <form onSubmit={handleSubmit}>
-        <input type="text" className="chat__input"/>
+        <input value={input} onChange={(e) => { setInput(e.target.value) }} type="text" className="chat__input" />
       </form>
     </div>
   )
