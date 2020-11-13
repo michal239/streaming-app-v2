@@ -1,46 +1,96 @@
-import React from 'react';
-import Field from '../FormField/FormField';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { gql, useMutation } from '@apollo/client';
 import { useForm } from '../../hooks/useForm';
-import Button from '../Button/Button';
+import { loginUser } from '../../store/actions/currentUser';
+import ClipLoader from 'react-spinners/ClipLoader';
 
-import '../RegisterForm/RegisterForm.scss';
+const LOGIN_USER = gql`
+	mutation login($email: String!, $password: String!) {
+		login(email: $email, password: $password)
+	}
+`;
 
-const LoginForm: React.FC = () => {
+const LoginForm: React.FC<any> = ({ loginUser, closeModal }) => {
 	const [inputFields, setInputFields] = useForm({
 		email: { value: '', touched: false },
 		password: { value: '', touched: false },
 	});
+	const [fetchingError, setFetchingError] = useState('');
+	const [
+		loginMutation,
+		{ loading: mutationLoading, data: mutationData, error: mutationError },
+	] = useMutation(LOGIN_USER);
+
+	useEffect(() => {
+		if (mutationError) setFetchingError(mutationError.message);
+	}, [mutationError]);
+
+	useEffect(() => {
+		setFetchingError('');
+	}, [inputFields]);
+
+	useEffect(() => {
+		if (mutationData) {
+			loginUser(mutationData.login);
+			closeModal();
+		}
+	}, [mutationData]);
+
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		const { email, password } = inputFields;
+		try {
+			await loginMutation({ variables: { email: email.value, password: password.value } });
+		} catch (e) {}
+	};
+
+	if (mutationLoading) {
+		return (
+			<div className="auth-form__loading-spinner">
+				<ClipLoader />
+			</div>
+		);
+	}
+
 	return (
-		<form className="register-form">
-			<div className="register-form__wrapper">
-				<div className="register-form__label">
+		<form onSubmit={handleSubmit} className="auth-form__form">
+			{fetchingError && <div className="auth-form__error-msg">{fetchingError}</div>}
+			<div className="auth-form__field-wrapper">
+				<div className="auth-form__label">
 					<label htmlFor="">Email</label>
 				</div>
-				<Field
-					className="register-form__field"
+				<input
+					className="auth-form__field"
 					type="text"
 					name="email"
 					value={inputFields.email.value}
-					handleChange={setInputFields}
+					onChange={setInputFields}
 				/>
 			</div>
-			<div className="register-form__wrapper">
-				<div className="register-form__label">
+			<div className="auth-form__field-wrapper">
+				<div className="auth-form__label">
 					<label htmlFor="">Password</label>
 				</div>
-				<Field
-					className="register-form__field"
+				<input
+					className="auth-form__field"
 					type="password"
 					name="password"
 					value={inputFields.password.value}
-					handleChange={setInputFields}
+					onChange={setInputFields}
 				/>
 			</div>
-			<div className="register-form__wrapper">
-				<Button className="auth-form__submit-btn">Login</Button>
+			<div className="auth-form__field-wrapper">
+				<button className="auth-form__submit-btn">Login</button>
 			</div>
 		</form>
 	);
 };
 
-export default LoginForm;
+const mapDispatchToProps = (dispatch: any) => ({
+	loginUser: (token: string) => {
+		dispatch(loginUser(token));
+	},
+});
+
+export default connect(null, mapDispatchToProps)(LoginForm);

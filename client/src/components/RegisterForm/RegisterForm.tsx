@@ -4,6 +4,7 @@ import { gql, useLazyQuery } from '@apollo/client';
 import AvailabilityMarker from './AvailabilityMarker';
 import Field from '../FormField/FormField';
 import Button from '../Button/Button';
+import { connect } from 'react-redux';
 
 import './RegisterForm.scss';
 const GET_USER = gql`
@@ -124,4 +125,15 @@ const RegisterForm: React.FC = () => {
 	);
 };
 
-export default RegisterForm;
+const mapDispatchToProps = () => {
+	return {
+		handleLogin(user: any) {
+			return {
+				action: 'LOG_IN',
+				user,
+			};
+		},
+	};
+};
+
+export default connect(null, mapDispatchToProps)(RegisterForm);

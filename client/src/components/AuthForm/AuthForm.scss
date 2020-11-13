@@ -1,32 +1,82 @@
 .auth-form {
-  border-radius: 4px;
-  padding: 40px 20px;
-  background-color: white;
-  position: relative;
-  .auth-form__close-icon {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 20px;
-    cursor: pointer;
-    &:hover {
-      color: var(--color-main-blue);
-    }
-  }
+	border-radius: 4px;
+	padding: 40px 20px;
+	background-color: white;
+	position: relative;
+	.auth-form__close-icon {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		font-size: 20px;
+		cursor: pointer;
+		&:hover {
+			color: var(--color-main-blue);
+		}
+	}
+	.auth-form__form {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+	.auth-form__loading-spinner {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: 100%;
+	}
+	.auth-form__error-msg {
+		// padding: 4px 10px;
+		color: orangered;
+		// background: lightcoral;
+		// border: 2px solid red;
+		// border-radius: 4px;
+	}
 
-  .auth-form__submit-btn {
-    font-weight: 700;
-    color: white;
-    height: 30px;
-    border: 0;
-    border-radius: 4px;
-    background-color: var(--color-main-blue);
-    width: 100%;
-    cursor: pointer;
-    &:disabled {
-      color:grey;
-      background-color: rgba(0,0,0,0.1);
-      cursor: not-allowed;
-    }
-  }
+	.auth-form__submit-btn {
+		font-weight: 700;
+		color: white;
+		height: 30px;
+		border: 0;
+		border-radius: 4px;
+		background-color: var(--color-main-blue);
+		width: 100%;
+		cursor: pointer;
+		&:disabled {
+			color: grey;
+			background-color: rgba(0, 0, 0, 0.1);
+			cursor: not-allowed;
+		}
+	}
+
+	.auth-form__field-wrapper {
+		margin-top: 24px;
+	}
+
+	.auth-form__label {
+		padding: 0 0 5px;
+		font-size: 14px;
+		font-weight: 700;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.auth-form__field {
+		box-sizing: border-box;
+		width: 100%;
+		height: 30px;
+		font-size: 16px;
+		outline: none;
+		padding: 0 10px;
+		border: 0;
+		border: 2px solid transparent;
+		background-color: rgba(0, 0, 0, 0.1);
+		border-radius: 4px;
+		transition: 0.2s;
+		&:focus {
+			border: 2px solid var(--color-main-blue);
+			background-color: white;
+			// transition: 0.25s;
+		}
+	}
 }

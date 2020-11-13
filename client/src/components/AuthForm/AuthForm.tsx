@@ -25,7 +25,11 @@ const AuthForm: React.FC<any> = props => {
 					<div className="auth-form">
 						<i className="fas fa-times auth-form__close-icon" onClick={props.closeModal}></i>
 						<AuthFormNavigation dispatch={dispatch} />
-						{display === 'DISPLAY_LOGIN-FORM' ? <LoginForm /> : <RegisterForm />}
+						{display === 'DISPLAY_LOGIN-FORM' ? (
+							<LoginForm closeModal={props.closeModal} />
+						) : (
+							<RegisterForm />
+						)}
 					</div>
 				</div>
 			</div>
