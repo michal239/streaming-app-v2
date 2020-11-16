@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { gql, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { useForm } from '../../hooks/useForm';
 import { loginUser } from '../../store/actions/currentUser';
 import ClipLoader from 'react-spinners/ClipLoader';
+import { setCookie } from '../../utils/cookies';
+import { LOGIN_USER } from '../../graphql'
 
-const LOGIN_USER = gql`
-	mutation login($email: String!, $password: String!) {
-		login(email: $email, password: $password)
-	}
-`;
 
 const LoginForm: React.FC<any> = ({ loginUser, closeModal }) => {
 	const [inputFields, setInputFields] = useForm({
@@ -19,12 +16,8 @@ const LoginForm: React.FC<any> = ({ loginUser, closeModal }) => {
 	const [fetchingError, setFetchingError] = useState('');
 	const [
 		loginMutation,
-		{ loading: mutationLoading, data: mutationData, error: mutationError },
+		{ loading: mutationLoading, data: mutationData },
 	] = useMutation(LOGIN_USER);
-
-	useEffect(() => {
-		if (mutationError) setFetchingError(mutationError.message);
-	}, [mutationError]);
 
 	useEffect(() => {
 		setFetchingError('');
@@ -32,7 +25,8 @@ const LoginForm: React.FC<any> = ({ loginUser, closeModal }) => {
 
 	useEffect(() => {
 		if (mutationData) {
-			loginUser(mutationData.login);
+      setCookie('token', mutationData.login);
+      loginUser(mutationData.login);
 			closeModal();
 		}
 	}, [mutationData]);
@@ -42,7 +36,9 @@ const LoginForm: React.FC<any> = ({ loginUser, closeModal }) => {
 		const { email, password } = inputFields;
 		try {
 			await loginMutation({ variables: { email: email.value, password: password.value } });
-		} catch (e) {}
+		} catch (e) {
+      setFetchingError(e.message);
+    }
 	};
 
 	if (mutationLoading) {

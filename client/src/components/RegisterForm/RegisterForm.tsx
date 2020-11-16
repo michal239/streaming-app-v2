@@ -1,12 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from '../../hooks/useForm';
 import { gql, useLazyQuery } from '@apollo/client';
 import AvailabilityMarker from './AvailabilityMarker';
-import Field from '../FormField/FormField';
-import Button from '../Button/Button';
 import { connect } from 'react-redux';
+import validate from '../../utils/registerValidation';
 
-import './RegisterForm.scss';
 const GET_USER = gql`
 	query user($key: String!, $value: String!) {
 		user(key: $key, value: $value) {
@@ -20,12 +18,24 @@ const RegisterForm: React.FC = () => {
 		username: { value: '', touched: false },
 		email: { value: '', touched: false },
 		password: { value: '', touched: false },
-	});
+  });
+  //@ts-ignore
+  const [fieldErrors, setFieldErrors] = useState({
+    username: '',
+    email: '',
+    password: ''
+  });
 	const [checkUser, { loading: userLoading, data: usernameData }] = useLazyQuery(GET_USER);
 	const [checkEmail, { loading: emailLoading, data: emailData }] = useLazyQuery(GET_USER);
-
+  
 	useEffect(() => {
-		if (!inputFields.username.touched) return;
+    if (!inputFields.username.touched) return;
+    try {
+      validate.username(inputFields.username.value);
+      setFieldErrors({ ...fieldErrors, username: ''})
+    } catch (error) {
+      setFieldErrors({ ...fieldErrors, username: error.message });
+    }
 		const timer = setTimeout(() => {
 			checkUser({ variables: { key: 'username', value: inputFields.username.value } });
 		}, 1000);
@@ -34,7 +44,7 @@ const RegisterForm: React.FC = () => {
 	}, [inputFields.username.value]);
 
 	useEffect(() => {
-		if (!inputFields.email.touched) return;
+		if (!inputFields.email.touched || !fieldErrors.email) return;
 		const timer = setTimeout(() => {
 			checkEmail({ variables: { key: 'email', value: inputFields.email.value } });
 		}, 1000);
@@ -62,9 +72,9 @@ const RegisterForm: React.FC = () => {
 	// }
 
 	return (
-		<form className="register-form">
-			<div className="register-form__wrapper">
-				<div className="register-form__label">
+		<form className="auth-form__form">
+			<div className="auth-form__field-wrapper">
+				<div className="auth-form__label">
 					<label htmlFor="">Username</label>
 					{inputFields.username.touched && (
 						<AvailabilityMarker
@@ -73,16 +83,17 @@ const RegisterForm: React.FC = () => {
 						/>
 					)}
 				</div>
-				<Field
-					className="register-form__field"
+				<input
+					className="auth-form__field"
 					type="text"
 					name="username"
 					value={inputFields.username.value}
-					handleChange={setInputFields}
+					onChange={setInputFields}
 				/>
+        <div>{fieldErrors.username}</div>
 			</div>
-			<div className="register-form__wrapper">
-				<div className="register-form__label">
+			<div className="auth-form__field-wrapper">
+				<div className="auth-form__label">
 					<label htmlFor="">Email</label>
 					{inputFields.email.touched && (
 						<AvailabilityMarker
@@ -91,16 +102,16 @@ const RegisterForm: React.FC = () => {
 						/>
 					)}
 				</div>
-				<Field
-					className="register-form__field"
+				<input
+					className="auth-form__field"
 					type="text"
 					name="email"
 					value={inputFields.email.value}
-					handleChange={setInputFields}
+					onChange={setInputFields}
 				/>
 			</div>
-			<div className="register-form__wrapper">
-				<div className="register-form__label">
+			<div className="auth-form__field-wrapper">
+				<div className="auth-form__label">
 					<label htmlFor="">Password</label>
 					{/* {inputFields.email.touched &&
             <AvailabilityMarker
@@ -108,18 +119,18 @@ const RegisterForm: React.FC = () => {
             success={emailData ? !emailData.user : false}
           />} */}
 				</div>
-				<Field
-					className="register-form__field"
+				<input
+					className="auth-form__field"
 					type="password"
 					name="password"
 					value={inputFields.password.value}
-					handleChange={setInputFields}
+					onChange={setInputFields}
 				/>
 			</div>
-			<div className="register-form__wrapper">
-				<Button className="auth-form__submit-btn" handleClick={() => {}}>
+			<div className="auth-form__field-wrapper">
+				<button className="auth-form__submit-btn">
 					Register
-				</Button>
+				</button>
 			</div>
 		</form>
 	);

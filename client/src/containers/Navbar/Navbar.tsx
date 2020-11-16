@@ -39,8 +39,8 @@ const Navbar: React.FC = () => {
 				<div className="navbar__item navbar__item--front container">
 					<div className="row">
 						<div style={{ display: 'flex' }} className="col-12 space-between">
-							<Link to="/">
-								<Logo />
+              <Link to="/">
+							  <Logo className="navbar__logo"/>
 							</Link>
 							<nav className="navbar__navigation-wraper">
 								<i onClick={() => changeView()} className="fas fa-search navbar__search-icon"></i>
@@ -50,18 +50,11 @@ const Navbar: React.FC = () => {
 					</div>
 				</div>
 				<div className="navbar__item navbar__item--back container">
-					<div
-						style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-						className="row"
-					>
-						<div
-							style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-							className="col-8"
-						>
+					<div style={{ justifyContent: 'center', alignItems: 'center' }} className="row">
+						<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} className="col-8 col-sm-12">
 							<i className="fas fa-search"></i>
 							<SearchBar />
 							<i
-								style={{ fontSize: '20px' }}
 								className="fas fa-times navbar__close-icon"
 								onClick={() => changeView()}
 							></i>

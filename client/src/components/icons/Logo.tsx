@@ -1,13 +1,18 @@
 import React from 'react';
 
-const Logo: React.FC = () => {
+interface LogoProps {
+  className?: string;
+}
+
+const Logo: React.FC<LogoProps> = ({ className }) => {
 	return (
 		<svg
 			id="Layer_3"
 			enableBackground="new 0 0 64 64"
 			height="40"
 			viewBox="0 0 64 64"
-			width="40"
+      width="40"
+      className={className}
 			xmlns="http://www.w3.org/2000/svg"
 		>
 			<g>

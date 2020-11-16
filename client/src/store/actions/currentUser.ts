@@ -3,6 +3,9 @@ import jwt from 'jsonwebtoken';
 import { gql } from '@apollo/client';
 import { client } from '../../App';
 
+import { ThunkAction, ThunkDispatch } from 'redux-thunk';
+import { AnyAction } from 'redux'
+
 const GET_USER = gql`
 	query user($key: String!, $value: String!) {
 		user(key: $key, value: $value) {
@@ -13,8 +16,8 @@ const GET_USER = gql`
 	}
 `;
 
-export const loginUser = (token: string) => {
-	return async (dispatch: any) => {
+export const loginUser = (token: string): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
+	return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
 		const decoded = jwt.decode(token);
 
 		let user;

@@ -21,7 +21,7 @@ const AuthForm: React.FC<any> = props => {
 	return (
 		<div className="container">
 			<div className="row" style={{ justifyContent: 'center' }}>
-				<div className="col-2">
+				<div className="col-lg-2 col-bg-3 col-md-4 col-sm-6 col-xs-9 col-us-12">
 					<div className="auth-form">
 						<i className="fas fa-times auth-form__close-icon" onClick={props.closeModal}></i>
 						<AuthFormNavigation dispatch={dispatch} />
