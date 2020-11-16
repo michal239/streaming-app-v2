@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface LogoProps {
-  className?: string;
+	className?: string;
 }
 
 const Logo: React.FC<LogoProps> = ({ className }) => {
@@ -11,8 +11,8 @@ const Logo: React.FC<LogoProps> = ({ className }) => {
 			enableBackground="new 0 0 64 64"
 			height="40"
 			viewBox="0 0 64 64"
-      width="40"
-      className={className}
+			width="40"
+			className={className}
 			xmlns="http://www.w3.org/2000/svg"
 		>
 			<g>

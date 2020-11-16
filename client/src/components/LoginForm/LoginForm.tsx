@@ -5,8 +5,7 @@ import { useForm } from '../../hooks/useForm';
 import { loginUser } from '../../store/actions/currentUser';
 import ClipLoader from 'react-spinners/ClipLoader';
 import { setCookie } from '../../utils/cookies';
-import { LOGIN_USER } from '../../graphql'
-
+import { LOGIN_USER } from '../../graphql';
 
 const LoginForm: React.FC<any> = ({ loginUser, closeModal }) => {
 	const [inputFields, setInputFields] = useForm({
@@ -14,10 +13,7 @@ const LoginForm: React.FC<any> = ({ loginUser, closeModal }) => {
 		password: { value: '', touched: false },
 	});
 	const [fetchingError, setFetchingError] = useState('');
-	const [
-		loginMutation,
-		{ loading: mutationLoading, data: mutationData },
-	] = useMutation(LOGIN_USER);
+	const [loginMutation, { loading: mutationLoading, data: mutationData }] = useMutation(LOGIN_USER);
 
 	useEffect(() => {
 		setFetchingError('');
@@ -25,8 +21,8 @@ const LoginForm: React.FC<any> = ({ loginUser, closeModal }) => {
 
 	useEffect(() => {
 		if (mutationData) {
-      setCookie('token', mutationData.login);
-      loginUser(mutationData.login);
+			setCookie('token', mutationData.login);
+			loginUser(mutationData.login);
 			closeModal();
 		}
 	}, [mutationData]);
@@ -37,8 +33,8 @@ const LoginForm: React.FC<any> = ({ loginUser, closeModal }) => {
 		try {
 			await loginMutation({ variables: { email: email.value, password: password.value } });
 		} catch (e) {
-      setFetchingError(e.message);
-    }
+			setFetchingError(e.message);
+		}
 	};
 
 	if (mutationLoading) {

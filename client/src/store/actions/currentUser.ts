@@ -1,10 +1,10 @@
-import { LOG_IN } from '../actionTypes';
+import { LOG_IN, LOG_OUT } from '../actionTypes';
 import jwt from 'jsonwebtoken';
 import { gql } from '@apollo/client';
 import { client } from '../../App';
-
+import { deleteCookie } from '../../utils/cookies';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
-import { AnyAction } from 'redux'
+import { AnyAction } from 'redux';
 
 const GET_USER = gql`
 	query user($key: String!, $value: String!) {
@@ -38,5 +38,12 @@ export const loginUser = (token: string): ThunkAction<Promise<void>, {}, {}, Any
 			type: LOG_IN,
 			user,
 		});
+	};
+};
+
+export const logoutUser = () => {
+	deleteCookie('token');
+	return {
+		type: LOG_OUT,
 	};
 };

@@ -18,24 +18,24 @@ const RegisterForm: React.FC = () => {
 		username: { value: '', touched: false },
 		email: { value: '', touched: false },
 		password: { value: '', touched: false },
-  });
-  //@ts-ignore
-  const [fieldErrors, setFieldErrors] = useState({
-    username: '',
-    email: '',
-    password: ''
-  });
+	});
+	//@ts-ignore
+	const [fieldErrors, setFieldErrors] = useState({
+		username: '',
+		email: '',
+		password: '',
+	});
 	const [checkUser, { loading: userLoading, data: usernameData }] = useLazyQuery(GET_USER);
 	const [checkEmail, { loading: emailLoading, data: emailData }] = useLazyQuery(GET_USER);
-  
+
 	useEffect(() => {
-    if (!inputFields.username.touched) return;
-    try {
-      validate.username(inputFields.username.value);
-      setFieldErrors({ ...fieldErrors, username: ''})
-    } catch (error) {
-      setFieldErrors({ ...fieldErrors, username: error.message });
-    }
+		if (!inputFields.username.touched) return;
+		try {
+			validate.username(inputFields.username.value);
+			setFieldErrors({ ...fieldErrors, username: '' });
+		} catch (error) {
+			setFieldErrors({ ...fieldErrors, username: error.message });
+		}
 		const timer = setTimeout(() => {
 			checkUser({ variables: { key: 'username', value: inputFields.username.value } });
 		}, 1000);
@@ -90,7 +90,7 @@ const RegisterForm: React.FC = () => {
 					value={inputFields.username.value}
 					onChange={setInputFields}
 				/>
-        <div>{fieldErrors.username}</div>
+				<div>{fieldErrors.username}</div>
 			</div>
 			<div className="auth-form__field-wrapper">
 				<div className="auth-form__label">
@@ -128,9 +128,7 @@ const RegisterForm: React.FC = () => {
 				/>
 			</div>
 			<div className="auth-form__field-wrapper">
-				<button className="auth-form__submit-btn">
-					Register
-				</button>
+				<button className="auth-form__submit-btn">Register</button>
 			</div>
 		</form>
 	);
