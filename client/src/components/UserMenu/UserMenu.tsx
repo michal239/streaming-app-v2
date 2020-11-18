@@ -1,24 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import ModalPortal from '../ModalPortal/ModalPortal';
 //@ts-ignore
 import avatar from '../../../public/userAvatar.png';
+import { useClickOutside } from '../../hooks/useClickOutside';
 import { logoutUser } from '../../store/actions/currentUser';
 import './UserMenu.scss';
 
 const UserMenu: React.FC<any> = props => {
 	const [displayMenu, setDisplayMenu] = useState(false);
 	const { currentUser } = props;
+	const menu = useRef(null);
+	const menuButton = useRef(null);
+  useClickOutside([menu, menuButton], () => { setDisplayMenu(false) });
 
 	return (
-		<>
-			<div className="user-menu__avatar" onClick={() => setDisplayMenu(state => !state)}>
+		<div>
+		  <div ref={menuButton} className="user-menu__avatar" onClick={() => setDisplayMenu(state => !state)}>
 				<img src={avatar} alt="" />
 			</div>
 			{displayMenu && (
 				<ModalPortal>
-					<div className="user-menu">
+					<div ref={menu} className="user-menu">
 						<Link to={currentUser.user.username}>
 							<div className="user-menu__button">
 								<i className="user-menu__icon far fa-play-circle"></i>
@@ -43,7 +47,7 @@ const UserMenu: React.FC<any> = props => {
 					</div>
 				</ModalPortal>
 			)}
-		</>
+		</div>
 	);
 };
 
