@@ -13,11 +13,17 @@ const UserMenu: React.FC<any> = props => {
 	const { currentUser } = props;
 	const menu = useRef(null);
 	const menuButton = useRef(null);
-  useClickOutside([menu, menuButton], () => { setDisplayMenu(false) });
+	useClickOutside([menu, menuButton], () => {
+		setDisplayMenu(false);
+	});
 
 	return (
 		<div>
-		  <div ref={menuButton} className="user-menu__avatar" onClick={() => setDisplayMenu(state => !state)}>
+			<div
+				ref={menuButton}
+				className="user-menu__avatar"
+				onClick={() => setDisplayMenu(state => !state)}
+			>
 				<img src={avatar} alt="" />
 			</div>
 			{displayMenu && (

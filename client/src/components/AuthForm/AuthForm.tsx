@@ -18,8 +18,10 @@ function reducer(state: any, action: any) {
 
 const AuthForm: React.FC<any> = props => {
 	const [display, dispatch] = useReducer(reducer, 'DISPLAY_LOGIN-FORM');
-  const authForm = useRef(null);
-  useClickOutside(authForm, () => { props.closeModal() });
+	const authForm = useRef(null);
+	useClickOutside(authForm, () => {
+		props.closeModal();
+	});
 
 	return (
 		<div className="container">

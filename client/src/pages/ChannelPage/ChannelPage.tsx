@@ -33,7 +33,7 @@ const ChannelPage: React.FC = (props: any) => {
 			value: username,
 		},
 	});
-	console.log(data);
+
 	if (loading)
 		return (
 			<section
@@ -64,7 +64,7 @@ const ChannelPage: React.FC = (props: any) => {
 					)}
 					<ChannelInfo user={data.user} />
 				</div>
-				<Chat />
+				<Chat username={username} />
 				{/* <div className="col-3 col-md-12">
           <h3>Ilość subów: {data.user.channel.subscriptions.count}</h3>
         </div> */}

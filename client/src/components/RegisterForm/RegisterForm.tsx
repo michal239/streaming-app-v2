@@ -113,11 +113,6 @@ const RegisterForm: React.FC = () => {
 			<div className="auth-form__field-wrapper">
 				<div className="auth-form__label">
 					<label htmlFor="">Password</label>
-					{/* {inputFields.email.touched &&
-            <AvailabilityMarker
-            loading={emailLoading}
-            success={emailData ? !emailData.user : false}
-          />} */}
 				</div>
 				<input
 					className="auth-form__field"

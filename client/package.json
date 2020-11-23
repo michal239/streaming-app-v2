@@ -27,6 +27,7 @@
     "react-spinners": "^0.9.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "socket.io-client": "^3.0.3",
     "video.js": "^7.8.4",
     "videojs-flvjs": "^0.2.0",
     "videojs-hlsjs-plugin": "^1.0.5"
