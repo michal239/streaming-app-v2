@@ -31,7 +31,9 @@ export const loginUser = (token: string): ThunkAction<Promise<void>, {}, {}, Any
 			});
 			user = data.user;
 		} catch (e) {
-			user = {};
+			dispatch({
+				type: LOG_OUT
+			})
 		}
 
 		dispatch({
