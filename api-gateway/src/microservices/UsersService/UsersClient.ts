@@ -65,6 +65,21 @@ function find(data: any, metadata?: IMetadata): Promise<Array<User>> {
   })
 }
 
+function findRegexp(data: any, metadata?: IMetadata): Promise<Array<User>> {
+  return new Promise((resolve, reject) => {
+    const meta = generateMetadata(metadata);
+    UsersClient.findRegexp(data, meta, (err: any, res: any) => {
+      if (err) {
+        reject(err);
+      } else if (res.status.failed) {
+        reject(new RequestFailedError(res.status))
+      } else {
+        resolve(res.users);
+      }
+    })
+  })
+}
+
 function findOne(data: any, metadata?: IMetadata): Promise<User | null> {
   return new Promise((resolve, reject) => {
     const meta = generateMetadata(metadata);
@@ -95,5 +110,6 @@ export default Object.freeze({
   login,
   register,
   find,
-  findOne
+  findOne,
+  findRegexp
 });

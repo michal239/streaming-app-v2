@@ -20,13 +20,21 @@ export class UserResolver {
 
   @Query(() => [User])
   async users(
-    @Arg('query') query: string
+    @Arg('key') key: string,
+    @Arg('value') value: string
   ): Promise<Array<User>> {
-    const stringifiedQuery = JSON.stringify({ gender: query })
+    const stringifiedQuery = JSON.stringify({ [key]: value })
     const users = await UsersClient.find({query: stringifiedQuery});
     return users;
   }
-
+  @Query(() => [User])
+  async search(
+    @Arg('key') key: string,
+    @Arg('value') value: string
+  ): Promise<Array<User>> {
+    const users = await UsersClient.findRegexp({ key, value });
+    return users;
+  }
   @FieldResolver(() => Channel, { nullable: true })
   async channel(
     @Root() user: User

@@ -29,7 +29,6 @@ const Chat: React.FC<ChatProps> = props => {
 	useEffect(() => {
 		socket = io(`http://localhost:5000/${username}`);
 		socket.on('chat message', (msg: any) => {
-			console.log('incoming msg: ', msg);
 			setMessages(state => [...state, msg]);
 		});
 	}, []);

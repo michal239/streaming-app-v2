@@ -49,10 +49,21 @@ message FindByIdResponse {
   Status status = 2;
 }
 
+message FindRegexpRequest {
+  string key = 1;
+  string value = 2;
+}
+
+message FindRegexpResponse {
+  repeated User users = 1;
+  Status status = 2;
+}
+
 service UsersService {
   rpc register (User) returns (emptyResponse);
   rpc login (User) returns (Token);
   rpc findOne (FindOneRequest) returns (FindOneResponse);
   rpc find (FindRequest) returns (FindResponse);
   rpc findById (FindByIdRequest) returns (FindByIdResponse);
+  rpc findRegexp (FindRegexpRequest) returns (FindRegexpResponse);
 }

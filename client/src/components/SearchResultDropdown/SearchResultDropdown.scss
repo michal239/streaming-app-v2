@@ -1,0 +1,42 @@
+.search-result {
+  position: fixed;
+  top: 60px;
+  .search-result__inner {
+    width: 100%;
+  }
+  .card {
+    padding: 10px 20px;
+    box-sizing: border-box;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &:hover {
+      background-color: #f1f1f1;
+    }
+    img {
+      width: 30px;
+    }
+    .card__element {
+      display: flex;
+      align-items: center;
+    }
+    .card__username {
+      margin-left: 10px;
+      font-size: 18px;
+    }
+    .card__live-label {
+      padding: 2px 4px;
+      background: red;
+      color:white;
+      text-transform: uppercase;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+    .card__viewers {
+      color:red;
+      margin-right: 10px;
+    }
+  }
+}
