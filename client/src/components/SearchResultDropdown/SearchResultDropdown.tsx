@@ -12,8 +12,8 @@ interface SearchResultDropdownProps {
 }
 
 const SearchResultCard: React.FC<any> = ({ user }) => {
-  const { username } = user;
-  
+	const { username } = user;
+
 	return (
 		<Link to={'/' + username}>
 			<div className="card">
@@ -43,8 +43,8 @@ const SearchResultDropdown: React.FC<SearchResultDropdownProps> = ({ users }) =>
 	});
 
 	useEffect(() => {
-    setDisplayDropdown(true);
-	}, [users])
+		setDisplayDropdown(true);
+	}, [users]);
 
 	if (!Array.isArray(users) || users.length === 0 || !displayDropdown) {
 		return null;

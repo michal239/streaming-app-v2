@@ -5,13 +5,14 @@ import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
 import { UserResolver } from './modules/user/resolvers/UserResolver'
 import { StreamResolver } from './modules/stream/resolvers/StreamResolver';
+import { ChannelResolver } from './modules/channel/resolvers/ChannelResolver';
 import cors from 'cors';
 
 const main = async () => {
   const app = express();
   app.use(cors())
   const schema = await buildSchema({
-    resolvers: [UserResolver, StreamResolver]
+    resolvers: [UserResolver, StreamResolver, ChannelResolver]
   })
   
   const apolloServer = new ApolloServer({

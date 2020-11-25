@@ -1,9 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './containers/Navbar/Navbar';
 import './styles/index.scss';
 import Homepage from './pages/Homepage/Homepage';
 import ChannelPage from './pages/ChannelPage/ChannelPage';
+import Settings from './pages/Settings/Settings';
 import { loginUser } from './store/actions/currentUser';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import store from './store';
@@ -27,8 +28,11 @@ const App = () => {
 				<ReduxProvider store={store}>
 					<Router>
 						<Navbar />
-						<Route path="/" exact component={Homepage} />
-						<Route path="/:username" exact component={ChannelPage} />
+						<Switch>
+							<Route exact path="/" component={Homepage} />
+							<Route path="/settings" component={Settings} />
+							<Route path="/:username" component={ChannelPage} />
+						</Switch>
 					</Router>
 				</ReduxProvider>
 			</ApolloProvider>
