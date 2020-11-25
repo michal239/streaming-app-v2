@@ -8,81 +8,81 @@ import { setCookie } from '../../utils/cookies';
 import { LOGIN_USER } from '../../graphql';
 
 const LoginForm: React.FC<any> = ({ loginUser, closeModal }) => {
-	const [inputFields, setInputFields] = useForm({
-		email: { value: '', touched: false },
-		password: { value: '', touched: false },
-	});
-	const [fetchingError, setFetchingError] = useState('');
-	const [loginMutation, { loading: mutationLoading, data: mutationData }] = useMutation(LOGIN_USER);
+  const [inputFields, setInputFields] = useForm({
+    email: { value: '', touched: false },
+    password: { value: '', touched: false },
+  });
+  const [fetchingError, setFetchingError] = useState('');
+  const [loginMutation, { loading: mutationLoading, data: mutationData }] = useMutation(LOGIN_USER);
 
-	useEffect(() => {
-		setFetchingError('');
-	}, [inputFields]);
+  useEffect(() => {
+    setFetchingError('');
+  }, [inputFields]);
 
-	useEffect(() => {
-		if (mutationData) {
-			setCookie('token', mutationData.login);
-			loginUser(mutationData.login);
-			closeModal();
-		}
-	}, [mutationData]);
+  useEffect(() => {
+    if (mutationData) {
+      setCookie('token', mutationData.login);
+      loginUser(mutationData.login);
+      closeModal();
+    }
+  }, [mutationData]);
 
-	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-		const { email, password } = inputFields;
-		try {
-			await loginMutation({ variables: { email: email.value, password: password.value } });
-		} catch (e) {
-			setFetchingError(e.message);
-		}
-	};
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const { email, password } = inputFields;
+    try {
+      await loginMutation({ variables: { email: email.value, password: password.value } });
+    } catch (e) {
+      setFetchingError(e.message);
+    }
+  };
 
-	if (mutationLoading) {
-		return (
-			<div className="auth-form__loading-spinner">
-				<ClipLoader />
-			</div>
-		);
-	}
+  if (mutationLoading) {
+    return (
+      <div className="auth-form__loading-spinner">
+        <ClipLoader />
+      </div>
+    );
+  }
 
-	return (
-		<form onSubmit={handleSubmit} className="auth-form__form">
-			{fetchingError && <div className="auth-form__error-msg">{fetchingError}</div>}
-			<div className="auth-form__field-wrapper">
-				<div className="auth-form__label">
-					<label htmlFor="">Email</label>
-				</div>
-				<input
-					className="auth-form__field"
-					type="text"
-					name="email"
-					value={inputFields.email.value}
-					onChange={setInputFields}
-				/>
-			</div>
-			<div className="auth-form__field-wrapper">
-				<div className="auth-form__label">
-					<label htmlFor="">Password</label>
-				</div>
-				<input
-					className="auth-form__field"
-					type="password"
-					name="password"
-					value={inputFields.password.value}
-					onChange={setInputFields}
-				/>
-			</div>
-			<div className="auth-form__field-wrapper">
-				<button className="auth-form__submit-btn">Login</button>
-			</div>
-		</form>
-	);
+  return (
+    <form onSubmit={handleSubmit} className="auth-form__form">
+      {fetchingError && <div className="auth-form__error-msg">{fetchingError}</div>}
+      <div className="auth-form__field-wrapper">
+        <div className="auth-form__label">
+          <label htmlFor="">Email</label>
+        </div>
+        <input
+          className="auth-form__field"
+          type="text"
+          name="email"
+          value={inputFields.email.value}
+          onChange={setInputFields}
+        />
+      </div>
+      <div className="auth-form__field-wrapper">
+        <div className="auth-form__label">
+          <label htmlFor="">Password</label>
+        </div>
+        <input
+          className="auth-form__field"
+          type="password"
+          name="password"
+          value={inputFields.password.value}
+          onChange={setInputFields}
+        />
+      </div>
+      <div className="auth-form__field-wrapper">
+        <button className="auth-form__submit-btn">Login</button>
+      </div>
+    </form>
+  );
 };
 
 const mapDispatchToProps = (dispatch: any) => ({
-	loginUser: (token: string) => {
-		dispatch(loginUser(token));
-	},
+  loginUser: (token: string) => {
+    dispatch(loginUser(token));
+  },
 });
 
 export default connect(null, mapDispatchToProps)(LoginForm);

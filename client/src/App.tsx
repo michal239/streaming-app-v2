@@ -11,33 +11,33 @@ import store from './store';
 import { Provider as ReduxProvider } from 'react-redux';
 import { getCookie } from './utils/cookies';
 export const client = new ApolloClient({
-	uri: 'http://localhost:7000/graphql',
-	cache: new InMemoryCache(),
+  uri: 'http://localhost:7000/graphql',
+  cache: new InMemoryCache(),
 });
 
 if (getCookie('token')) {
-	const token = getCookie('token');
-	// @ts-ignore
-	store.dispatch(loginUser(token));
+  const token = getCookie('token');
+  // @ts-ignore
+  store.dispatch(loginUser(token));
 }
 
 const App = () => {
-	return (
-		<>
-			<ApolloProvider client={client}>
-				<ReduxProvider store={store}>
-					<Router>
-						<Navbar />
-						<Switch>
-							<Route exact path="/" component={Homepage} />
-							<Route path="/settings" component={Settings} />
-							<Route path="/:username" component={ChannelPage} />
-						</Switch>
-					</Router>
-				</ReduxProvider>
-			</ApolloProvider>
-		</>
-	);
+  return (
+    <>
+      <ApolloProvider client={client}>
+        <ReduxProvider store={store}>
+          <Router>
+            <Navbar />
+            <Switch>
+              <Route exact path="/" component={Homepage} />
+              <Route path="/settings" component={Settings} />
+              <Route path="/:username" component={ChannelPage} />
+            </Switch>
+          </Router>
+        </ReduxProvider>
+      </ApolloProvider>
+    </>
+  );
 };
 
 export default App;
