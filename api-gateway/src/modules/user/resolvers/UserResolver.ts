@@ -1,10 +1,12 @@
-import { Resolver, Query, Arg, Mutation, FieldResolver, Root } from 'type-graphql';
-import UsersClient from '../../../microservices/UsersService/UsersClient'
+import { Resolver, Query, Arg, FieldResolver, Root } from 'type-graphql';
+
 import { User } from '../entity/User';
 import { Channel } from '../../channel/entity/Channel';
-import ChannelsClient from '../../../microservices/ChannelsService/ChannelsClient';
 import { Stream } from '../../stream/entity/Stream';
+import UsersClient from '../../../microservices/UsersService/UsersClient'
+import ChannelsClient from '../../../microservices/ChannelsService/ChannelsClient';
 import StreamsClient from '../../../microservices/StreamsService/StreamsClient';
+
 
 @Resolver(() => User)
 export class UserResolver {
@@ -27,6 +29,7 @@ export class UserResolver {
     const users = await UsersClient.find({query: stringifiedQuery});
     return users;
   }
+
   @Query(() => [User])
   async search(
     @Arg('key') key: string,
@@ -35,6 +38,7 @@ export class UserResolver {
     const users = await UsersClient.findRegexp({ key, value });
     return users;
   }
+
   @FieldResolver(() => Channel, { nullable: true })
   async channel(
     @Root() user: User
@@ -52,25 +56,5 @@ export class UserResolver {
     const channel = await ChannelsClient.findOne({ query });
     const stream = await StreamsClient.getStream({ streamKey: channel?.streamKey });
     return stream;
-  }
-
-  @Mutation(() => String)
-  async login(
-    @Arg('email') email: string,
-    @Arg('password') password: string
-  ): Promise<string> {
-    const token = await UsersClient.login({ email, password });
-    return token;
-  }
-
-  @Mutation(() => User)
-  async register(
-    @Arg('username') username: string,
-    @Arg('email') email: string,
-    @Arg('password') password: string
-  ): Promise<User> {
-    const user = await UsersClient.register({ username, email, password });
-    await ChannelsClient.createChannel({ userId: user.id });
-    return user;
   }
 };
