@@ -18,9 +18,9 @@ export const client = new ApolloClient({
 });
 
 if (getCookie('token')) {
-  const token = getCookie('token');
+  // const token = getCookie('token');
   // @ts-ignore
-  store.dispatch(loginUser(token));
+  store.dispatch(loginUser());
 }
 
 const App = () => {

@@ -1,14 +1,13 @@
 import { LOG_IN, LOG_OUT } from '../actionTypes';
-import jwt from 'jsonwebtoken';
+// import jwt from 'jsonwebtoken';
 import { gql } from '@apollo/client';
 import { client } from '../../App';
-import { deleteCookie } from '../../utils/cookies';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 
-const GET_USER = gql`
-  query user($key: String!, $value: String!) {
-    user(key: $key, value: $value) {
+const ME = gql`
+  query me {
+    me {
       id
       username
       email
@@ -16,36 +15,39 @@ const GET_USER = gql`
   }
 `;
 
-export const loginUser = (token: string): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
-  return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
-    const decoded = jwt.decode(token);
+const LOG_OUT_MUTATION = gql`
+  mutation logout {
+    logout
+  }
+`;
 
-    let user;
+export const loginUser = (): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
+  return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
     try {
       const { data } = await client.query({
-        query: GET_USER,
-        variables: {
-          key: '_id',
-          value: (decoded as any).id,
-        },
+        query: ME
       });
-      user = data.user;
+      dispatch({
+        type: LOG_IN,
+        user: data.me
+      })
     } catch (e) {
       dispatch({
         type: LOG_OUT,
       });
     }
-
-    dispatch({
-      type: LOG_IN,
-      user,
-    });
   };
 };
 
-export const logoutUser = () => {
-  deleteCookie('token');
-  return {
-    type: LOG_OUT,
-  };
+export const logoutUser = (): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
+  return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
+    try {
+      await client.mutate({
+        mutation: LOG_OUT_MUTATION
+      })
+    } catch (e) {}
+    dispatch({
+      type: LOG_OUT
+    })
+  }
 };

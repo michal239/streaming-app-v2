@@ -1,4 +1,4 @@
-import { Resolver, Mutation, Arg, Ctx, Query } from 'type-graphql';
+import { Resolver, Mutation, Arg, Ctx, Query, Authorized } from 'type-graphql';
 
 import { User } from '../entity/User';
 import UsersClient from '../../../microservices/UsersService/UsersClient';
@@ -6,11 +6,13 @@ import ChannelsClient from '../../../microservices/ChannelsService/ChannelsClien
 
 @Resolver()
 export class AuthResolver {
+  @Authorized()
   @Query(() => User, { nullable: true })
   async me(
     @Ctx() ctx: any
   ): Promise<User | null> {
-    const id = ctx.req.user.id;
+    if (!ctx.user) return null;
+    const id = ctx.user.id;
     const query = JSON.stringify({ _id: id });
     const user = await UsersClient.findOne({ query });
     return user;
@@ -39,5 +41,12 @@ export class AuthResolver {
     const user = await UsersClient.register({ username, email, password });
     await ChannelsClient.createChannel({ userId: user.id });
     return user;
+  }
+
+  @Mutation(() => String, { nullable: true })
+  async logout(
+    @Ctx() ctx: any
+  ): Promise<void> {
+    ctx.res.clearCookie('token');
   }
 }

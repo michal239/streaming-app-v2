@@ -13,7 +13,7 @@ import { StreamResolver } from './modules/stream/resolvers/StreamResolver';
 import { ChannelResolver } from './modules/channel/resolvers/ChannelResolver';
 
 const authChecker: AuthChecker<any> = ({ context }) => {
-  return !!context.user
+  return !!context.user;
 }
 
 const main = async () => {
@@ -35,7 +35,10 @@ const main = async () => {
         req.user = verified;
       } catch (err) {
         res.clearCookie('token');
+        req.user = undefined;
       }
+    } else {
+      req.user = undefined;
     }
     next();
   })
