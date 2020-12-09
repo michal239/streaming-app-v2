@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './Navbar.scss';
@@ -8,26 +8,9 @@ import AuthButtons from '../../components/AuthButtons/AuthButtons';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import UserMenu from '../../components/UserMenu/UserMenu';
 
-const Navbar: React.FC<any> = props => {
+const Navbar: React.FC<any> = ({ currentUser }) => {
   const navbar = useRef<HTMLDivElement>(null);
   const navbarInner = useRef<HTMLDivElement>(null);
-  const { currentUser } = props;
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-  let previousScrollValue = 0; //a way better performance vs useState
-  const handleScroll = () => {
-    if (window.scrollY > previousScrollValue && window.scrollY > 60) {
-      if (navbar.current) navbar.current.classList.add('hidden');
-    } else {
-      if (navbar.current) navbar.current.classList.remove('hidden');
-    }
-    previousScrollValue = window.scrollY;
-  };
 
   const changeView = () => {
     if (navbarInner.current) {
@@ -35,7 +18,7 @@ const Navbar: React.FC<any> = props => {
       navbarInner.current.classList.toggle('navbar__inner--display--back');
     }
   };
-  console.log(props);
+
   return (
     <div ref={navbar} className="navbar">
       <div ref={navbarInner} className="navbar__inner navbar__inner--display--front">

@@ -8,11 +8,68 @@
   }
 
   .channel-info__username {
-    margin: 0;
-    font-size: 24px;
+    margin: 0 0 2px 8px;
+    font-size: 20px;
   }
   .channel-info__subscriptions {
     color: var(--color-main-grey);
+    margin: 4px 0 0 8px;
     font-size: 12px;
+  }
+  .channel-info__logo {
+    position: relative;
+    img {
+      width: 60px;
+      height: 60px;
+      box-sizing: border-box;
+      border: 2px solid grey;
+      border-radius: 50%;
+    }
+    
+  }
+  .channel-info__label {
+    position: absolute;
+    bottom: -2px;
+    left: -2px;
+    padding: 4px 4px;
+    width: 64px;
+    box-sizing: border-box;
+    background-color: gray;
+    color: white;
+    text-transform: uppercase;
+    border-radius: 6px;
+    font-size: 12px;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .channel-info__label--online {
+    background-color: red;
+  }
+
+  .channel-info__category {
+    font-size: 14px;
+    color: var(--color-main-blue);
+    padding: 2px 8px;
+    border-radius: 12px;
+    &:hover {
+      background-color: lightgrey;
+      transition: 0.25s;
+    }
+  }
+
+  .channel-info__title {
+    margin: 0 0 2px 8px;
+    font-size: 14px;
+  }
+
+  .channel-info__viewers {
+    color: red;
+    margin-right: 8px;
+  }
+
+  .channel-info__stream-stats {
+    margin-top: 6px;
+    text-align: right;
   }
 }

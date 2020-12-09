@@ -47,41 +47,43 @@ const Chat: React.FC<ChatProps> = props => {
 
   return (
     <div className="chat">
-      <div className="chat__navigation"></div>
-      <div className="chat__messages">
-        {messages.map(msg => {
-          return (
-            <div>
-              <span style={{ color: msg.textColor }}>{msg.username}: </span>
-              {msg.message}
-            </div>
-          );
-        })}
-      </div>
-      {currentUser.isAuthenticated ? (
-        <form onSubmit={handleSubmit}>
-          <input
-            value={input}
-            onChange={e => {
-              setInput(e.target.value);
-            }}
-            type="text"
-            className="chat__input"
-            placeholder="message..."
-          />
-        </form>
-      ) : (
-        <div onClick={() => setShowAuthForm(true)} className="">
-          Log in to Chat
+      <div className="chat__inner">
+        <div className="chat__navigation"></div>
+        <div className="chat__messages">
+          {messages.map(msg => {
+            return (
+              <div style={{ margin: '2px 0' }}>
+                <span style={{ color: msg.textColor }}>{msg.username}: </span>
+                {msg.message}
+              </div>
+            );
+          })}
         </div>
-      )}
-      {showAuthForm && (
-        <ModalPortal>
-          <Modal>
-            <AuthForm closeModal={() => setShowAuthForm(false)} />
-          </Modal>
-        </ModalPortal>
-      )}
+        {currentUser.isAuthenticated ? (
+          <form onSubmit={handleSubmit}>
+            <input
+              value={input}
+              onChange={e => {
+                setInput(e.target.value);
+              }}
+              type="text"
+              className="chat__input"
+              placeholder="message..."
+            />
+          </form>
+        ) : (
+          <div onClick={() => setShowAuthForm(true)} className="chat__login-btn">
+            Log in to Chat
+          </div>
+        )}
+        {showAuthForm && (
+          <ModalPortal>
+            <Modal>
+              <AuthForm closeModal={() => setShowAuthForm(false)} />
+            </Modal>
+          </ModalPortal>
+        )}
+      </div>
     </div>
   );
 };

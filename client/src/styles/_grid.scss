@@ -23,6 +23,13 @@
 .space-between {
   justify-content: space-between;
 }
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 $columns: 12;
 $large: 1600px;
 $big: 1200px;

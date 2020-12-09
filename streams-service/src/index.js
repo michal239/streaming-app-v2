@@ -5,6 +5,7 @@ import removeStream from './controllers/removeStream';
 import updateViewers from './jobs/updateViewers';
 import getStreams from './controllers/getStreams';
 import getStream from './controllers/getStream';
+import setStreamInfo from './controllers/setStreamInfo';
 
 updateViewers.start();
 
@@ -12,7 +13,8 @@ const services = {
   addStream,
   removeStream,
   getStreams,
-  getStream
+  getStream,
+  setStreamInfo
 }
 
 const PROTO_PATH = path.resolve(__dirname, './streams.proto');

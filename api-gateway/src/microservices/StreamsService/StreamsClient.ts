@@ -28,6 +28,32 @@ function getStream(data: any): Promise<Stream | null> {
   })
 }
 
+function getStreams(): Promise<Array<Stream>> {
+  return new Promise((resolve, reject) => {
+    StreamsClient.getStreams({}, (err: any, res: any) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(res.streams);
+      }
+    })
+  })
+}
+
+function setStreamInfo(data: any) {
+  return new Promise((resolve, reject) => {
+    StreamsClient.setStreamInfo(data, (err: any, res: any) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(res);
+      }
+    })
+  })
+}
+
 export default Object.freeze({
-  getStream
+  getStream,
+  getStreams,
+  setStreamInfo
 })

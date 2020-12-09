@@ -14,6 +14,8 @@ message Stream {
   int32 viewers = 1;
   int64 liveSince = 2;
   string streamKey = 3;
+  string title = 4;
+  string category = 5;
 }
 message getStreamResponse {
   Stream stream = 1;
@@ -22,9 +24,20 @@ message getStreamsResponse {
   repeated Stream streams = 1;
 }
 
+message setStreamInfoRequest {
+  string streamKey = 1;
+  string title = 2;
+  string category = 3;
+}
+
+message setStreamInfoResponse {
+  
+}
+
 service StreamsService {
   rpc addStream (streamRequest) returns (emptyResponse);
   rpc removeStream (streamRequest) returns (emptyResponse);
   rpc getStream (streamRequest) returns (getStreamResponse);
   rpc getStreams (emptyResponse) returns (getStreamsResponse);
+  rpc setStreamInfo (setStreamInfoRequest) returns (setStreamInfoResponse);
 }

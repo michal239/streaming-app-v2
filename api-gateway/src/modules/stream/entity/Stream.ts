@@ -10,4 +10,10 @@ export class Stream {
 
   @Field()
   streamKey: string;
+
+  @Field()
+  category: string;
+
+  @Field()
+  title: string;
 }

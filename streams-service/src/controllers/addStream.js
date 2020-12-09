@@ -3,7 +3,9 @@ import client from '../redis-setup'
 function INITIAL_STATE() {
   return {
     viewers: 0,
-    liveSince: Date.now()
+    liveSince: Date.now(),
+    category: null,
+    title: null
   }
 }
 

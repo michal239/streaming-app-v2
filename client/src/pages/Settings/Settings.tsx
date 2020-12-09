@@ -29,12 +29,8 @@ const Settings: React.FC<any> = ({ currentUser }) => {
     <div className="container settings">
       <div className="row">
         <div className="col-12">
-          <p>
-            <h3>RTMP Url: rtmp://127.0.0.1:1935/live</h3>
-          </p>
-          <p>
-            <h3>Stream key: {data && data.channel.streamKey}</h3>
-          </p>
+          <h3>RTMP Url: rtmp://127.0.0.1:1935/live</h3>
+          <h3>Stream key: {data && data.channel.streamKey}</h3>
         </div>
       </div>
     </div>

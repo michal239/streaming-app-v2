@@ -12,6 +12,7 @@ const GET_USER = gql`
       username
       channel {
         id
+        streamKey
         subscriptions {
           count
         }
@@ -19,6 +20,8 @@ const GET_USER = gql`
       stream {
         viewers
         liveSince
+        category
+        title
       }
     }
   }
@@ -36,17 +39,7 @@ const ChannelPage: React.FC = (props: any) => {
 
   if (loading)
     return (
-      <section
-        style={{
-          boxSizing: 'border-box',
-          paddingTop: '60px',
-          width: '100vw',
-          height: '100vh',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
+      <section className="flex-center">
         <ClipLoader color={'var(--color-main-dark)'} />
       </section>
     );
@@ -57,14 +50,11 @@ const ChannelPage: React.FC = (props: any) => {
     <section className="channel-page container-fluid">
       <div className="row">
         <div className="col-9 col-md-12">
-          {data.user.stream ? (
-            <VideoPlayer />
-          ) : (
-            <div className="channel-page__video-player-placeholder" />
-          )}
+          <VideoPlayer streamKey={data.user.channel.streamKey} />
           <ChannelInfo user={data.user} />
+          <Chat username={username} />
         </div>
-        <Chat username={username} />
+
         {/* <div className="col-3 col-md-12">
           <h3>Ilość subów: {data.user.channel.subscriptions.count}</h3>
         </div> */}
