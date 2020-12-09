@@ -34,10 +34,15 @@ message setStreamInfoResponse {
   
 }
 
+message getThumbnailResponse {
+  string data = 1;
+}
+
 service StreamsService {
   rpc addStream (streamRequest) returns (emptyResponse);
   rpc removeStream (streamRequest) returns (emptyResponse);
   rpc getStream (streamRequest) returns (getStreamResponse);
   rpc getStreams (emptyResponse) returns (getStreamsResponse);
   rpc setStreamInfo (setStreamInfoRequest) returns (setStreamInfoResponse);
+  rpc getThumbnail (streamRequest) returns (getThumbnailResponse);
 }

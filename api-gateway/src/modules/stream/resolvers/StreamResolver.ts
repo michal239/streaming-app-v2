@@ -1,9 +1,9 @@
 import ChannelsClient from '../../../microservices/ChannelsService/ChannelsClient';
-import { Resolver, Query, Arg, Mutation, Ctx, Authorized } from 'type-graphql';
+import { Resolver, Query, Arg, Mutation, Ctx, Authorized, FieldResolver, Root } from 'type-graphql';
 import StreamsClient from '../../../microservices/StreamsService/StreamsClient';
 import { Stream } from '../entity/Stream';
 
-@Resolver()
+@Resolver(() => Stream)
 export class StreamResolver {
   @Query(() => Stream, { nullable: true })
   async stream (
@@ -17,6 +17,14 @@ export class StreamResolver {
   async streams(): Promise<Array<Stream>> {
     const streams = await StreamsClient.getStreams();
     return streams;
+  }
+
+  @FieldResolver(() => String, { nullable: true })
+  async thumbnail(
+    @Root() stream: Stream
+  ) {
+    const img = await StreamsClient.getThumbnail({ streamKey: stream.streamKey });
+    return img
   }
 
   @Authorized()

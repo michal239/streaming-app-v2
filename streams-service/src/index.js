@@ -1,21 +1,25 @@
 import App from './App'
 import path from 'path'
+
 import addStream from './controllers/addStream';
 import removeStream from './controllers/removeStream';
-import updateViewers from './jobs/updateViewers';
 import getStreams from './controllers/getStreams';
 import getStream from './controllers/getStream';
 import setStreamInfo from './controllers/setStreamInfo';
-import jobo from './jobs/generateThumbnails';
+import getThumbnail from './controllers/getThumbnail';
+import updateViewers from './jobs/updateViewers';
+import updateThumbnails from './jobs/updateThumbnails';
+
 updateViewers.start();
-jobo.start();
+updateThumbnails.start();
 
 const services = {
   addStream,
   removeStream,
   getStreams,
   getStream,
-  setStreamInfo
+  setStreamInfo,
+  getThumbnail
 }
 
 const PROTO_PATH = path.resolve(__dirname, './streams.proto');

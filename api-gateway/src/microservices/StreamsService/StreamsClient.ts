@@ -2,6 +2,7 @@ import grpc from 'grpc';
 import * as protoLoader from '@grpc/proto-loader';
 import { Stream } from '../../modules/stream/entity/Stream';
 
+
 const PROTO_PATH = __dirname + '../../../../../_proto/streams.proto';
 
 const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
@@ -52,8 +53,21 @@ function setStreamInfo(data: any) {
   })
 }
 
+function getThumbnail(data: any) {
+  return new Promise((resolve, reject) => {
+    StreamsClient.getThumbnail(data, (err: any, res: any) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(res.data);
+      }
+    })
+  })
+}
+
 export default Object.freeze({
   getStream,
   getStreams,
-  setStreamInfo
+  setStreamInfo,
+  getThumbnail
 })
