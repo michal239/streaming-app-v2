@@ -6,8 +6,9 @@ import updateViewers from './jobs/updateViewers';
 import getStreams from './controllers/getStreams';
 import getStream from './controllers/getStream';
 import setStreamInfo from './controllers/setStreamInfo';
-
+import jobo from './jobs/generateThumbnails';
 updateViewers.start();
+jobo.start();
 
 const services = {
   addStream,
