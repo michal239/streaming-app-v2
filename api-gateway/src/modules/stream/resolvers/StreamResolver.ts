@@ -2,6 +2,8 @@ import ChannelsClient from '../../../microservices/ChannelsService/ChannelsClien
 import { Resolver, Query, Arg, Mutation, Ctx, Authorized, FieldResolver, Root } from 'type-graphql';
 import StreamsClient from '../../../microservices/StreamsService/StreamsClient';
 import { Stream } from '../entity/Stream';
+import { User } from '../../user/entity/User';
+import UsersClient from '../../../microservices/UsersService/UsersClient';
 
 @Resolver(() => Stream)
 export class StreamResolver {
@@ -25,6 +27,19 @@ export class StreamResolver {
   ) {
     const img = await StreamsClient.getThumbnail({ streamKey: stream.streamKey });
     return img
+  }
+
+  @FieldResolver(() => User, { nullable: true })
+  async user(
+    @Root() stream: Stream
+  ): Promise<User | null> {
+    const channelQuery = JSON.stringify({ streamKey: stream.streamKey });
+    const channel = await ChannelsClient.findOne({ query: channelQuery });
+
+    const userQuery = JSON.stringify({ _id: channel?.userId });
+    const user = await UsersClient.findOne({ query: userQuery });
+
+    return user;
   }
 
   @Authorized()

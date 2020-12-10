@@ -20,7 +20,7 @@ export default async function setStreamInfoController(ctx) {
 
   if (res) {
     const { title, category } = ctx.req;
-    res.title = title.slice(0, 10) || res.title;
+    res.title = title.slice(0, 48) || res.title;
     res.category = availableCategories.includes(category) ? category : res.category;
     client.hset('streams', ctx.req.streamKey, JSON.stringify(res));
   }

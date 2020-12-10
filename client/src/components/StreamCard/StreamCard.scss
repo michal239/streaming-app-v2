@@ -1,0 +1,80 @@
+.stream-card {
+  width: 100%;
+  
+  .stream-card__thumbnail {
+    width: 100%;
+    position: relative;
+  }
+  .inner {
+    position: relative;
+    transition: 0.25s;
+  }
+  .stream-card__live-label {
+    position: absolute;
+    top: .5rem;
+    left: .5rem;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: white;
+    background-color: red;
+    font-weight: bold;
+    padding: 2px 4px;
+    border-radius: 4px;
+  }
+
+  .stream-card__viewers {
+    position: absolute;
+    bottom: .8rem;
+    left: .5rem;
+    font-size: 14px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    font-weight: bold;
+    padding: 2px 4px;
+    border-radius: 4px;
+  }
+  
+  .stream-card__description {
+    display: flex;
+    padding: 5px 10px;
+    font-size: 14px;
+  }
+
+  .stream-card__user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+
+  .stream-card__title {
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    &:hover {
+      color: var(--color-main-blue)
+    }
+  }
+
+  .stream-card__username {
+    margin-bottom: 4px;
+    color: #5a5a5a;
+    cursor: pointer;
+    &:hover {
+      color: var(--color-main-blue)
+    }
+  }
+
+  .stream-card__category {
+    margin-bottom: 4px;
+    color: #5a5a5a;
+    cursor: pointer;
+    &:hover {
+      color: var(--color-main-blue)
+    }
+  }
+}

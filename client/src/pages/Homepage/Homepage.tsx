@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery, gql } from '@apollo/client';
-import VideoPlayer from '../../components/VideoPlayer/VideoPlayer';
+import StreamCard from '../../components/StreamCard/StreamCard';
+// import VideoPlayer from '../../components/VideoPlayer/VideoPlayer';
 
 const GET_STREAMS = gql`
   query streams {
@@ -8,6 +9,12 @@ const GET_STREAMS = gql`
       viewers
       liveSince
       streamKey
+      thumbnail
+      category
+      title
+      user {
+        username
+      }
     }
   }
 `;
@@ -19,13 +26,10 @@ const Homepage = () => {
   console.log(data, loading, error);
   if (data) {
     return (
-      <div>
-        {
-          //@ts-ignore
-          data.streams.map(stream => {
-            return <VideoPlayer streamKey={stream.streamKey} />;
-          })
-        }
+      <div style={{ height: '200vh' }}>
+        {data.streams.map((stream: any) => {
+          return <StreamCard stream={stream} />;
+        })}
       </div>
     );
   }
