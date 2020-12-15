@@ -17,11 +17,11 @@ const SEARCH_USERS = gql`
 
 const SearchBar: React.FC = () => {
   const [{ searchInput }, setSearchInput] = useForm({ searchInput: { value: '', touched: false } });
-  const [fetchUsers, { data }] = useLazyQuery(SEARCH_USERS);
+  const [fetchUsers, { data }] = useLazyQuery(SEARCH_USERS, { fetchPolicy: 'no-cache' });
 
   useEffect(() => {
     const { value } = searchInput;
-    if (value.length <= 3) return;
+    if (value.length < 3) return;
 
     const timer = setTimeout(() => {
       fetchUsers({
