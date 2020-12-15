@@ -40,7 +40,9 @@ const StreamCard: React.FC<StreamCardProps> = props => {
           <Link to={username}>
             <div className="stream-card__username">{username}</div>
           </Link>
-          <div className="stream-card__category">{category}</div>
+          <Link to={'/category/' + category}>
+            <div className="stream-card__category">{category}</div>
+          </Link>
         </div>
       </div>
     </div>

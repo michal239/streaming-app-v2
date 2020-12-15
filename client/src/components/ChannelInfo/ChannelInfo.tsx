@@ -45,7 +45,7 @@ const ChannelInfo: React.FC<any> = props => {
             <h3 className="channel-info__username">{user.username}</h3>
             {user.stream && <h5 className="channel-info__title">{user.stream.title}</h5>}
             {user.stream && (
-              <Link className="channel-info__category" to={'/' + user.stream.category}>
+              <Link className="channel-info__category" to={'/category/' + user.stream.category}>
                 {user.stream.category}
               </Link>
             )}

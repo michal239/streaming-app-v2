@@ -1,13 +1,14 @@
 import React from 'react';
 import { useQuery, gql } from '@apollo/client';
+
+import { ClipLoader } from 'react-spinners'
 import StreamCard from '../../components/StreamCard/StreamCard';
-// import VideoPlayer from '../../components/VideoPlayer/VideoPlayer';
+import Categories from './Categories';
 
 const GET_STREAMS = gql`
   query streams {
     streams {
       viewers
-      liveSince
       streamKey
       thumbnail
       category
@@ -20,20 +21,32 @@ const GET_STREAMS = gql`
 `;
 
 const Homepage = () => {
-  const { data, loading, error } = useQuery(GET_STREAMS, {
-    pollInterval: 3000,
-  });
-  console.log(data, loading, error);
-  if (data) {
-    return (
-      <div style={{ height: '200vh' }}>
-        {data.streams.map((stream: any) => {
-          return <StreamCard stream={stream} />;
-        })}
+  const { data, loading } = useQuery(GET_STREAMS);
+
+  if (loading) return <div style={{ width: '100vw', height: '100vh' }} className="flex-center"><ClipLoader /></div>;
+
+  return (
+    <div style={{ marginTop: '100px' }}>
+      <div className="container">
+        <h2 style={{ marginLeft: '10px' }}>Live channels</h2>
+        <div className="row">
+          {data.streams
+            .filter((stream: any, index: number) => {
+              return index < 8;
+            })
+            .map((stream: any) => {
+              return (
+                <div className="col-3 col-sm-6" key={stream.user.username}>
+                  <StreamCard stream={stream} />
+                </div>
+              );
+            })}
+        </div>
+        <hr />
       </div>
-    );
-  }
-  return <h2 style={{ marginTop: '60px', height: '200vh' }}>nic</h2>;
+      <Categories />
+    </div>
+  );
 };
 
 export default Homepage;

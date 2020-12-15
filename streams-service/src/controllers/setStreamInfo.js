@@ -7,7 +7,8 @@ const availableCategories = [
   'World of Tanks',
   'Fortnite',
   'Chess',
-  'VALORANT'
+  'VALORANT',
+  'Cyberpunk 2077'
 ]
 
 export default async function setStreamInfoController(ctx) {

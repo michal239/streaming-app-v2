@@ -1,0 +1,28 @@
+.categories {
+  margin: 20px 0 40px 0;
+  .categories__card {
+    padding: 0 10px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    
+  }
+  .categories__img {
+    width: 100%;
+    transition: transform 0.25s;
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+  .categories__name {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 8px 0;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    &:hover {
+      color: var(--color-main-blue);
+    }
+  }
+}

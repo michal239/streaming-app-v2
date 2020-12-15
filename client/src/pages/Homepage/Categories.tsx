@@ -1,0 +1,76 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import './Categories.scss';
+
+//@ts-ignore
+import amongUsImage from '../../../public/Among_Us.jpg';
+//@ts-ignore
+import cyberpunkImage from '../../../public/Cyberpunk_2077.jpg';
+//@ts-ignore
+import valorantImage from '../../../public/VALORANT.jpg';
+//@ts-ignore
+import csgoImage from '../../../public/Counter-Strike_Global_Offensive.jpg';
+//@ts-ignore
+import leagueOfLegendsImage from '../../../public/League_Of_Legends.jpg';
+//@ts-ignore
+import fortniteImage from '../../../public/Fortnite.jpg';
+
+const Categories: React.FC = () => {
+  return (
+    <div className="container categories">
+      <h2>Popular categories</h2>
+      <div className="row">
+        <div className="col-2 col-us-4">
+          <Link to="/category/Fortnite">
+            <div className="categories__card">
+              <img src={fortniteImage} className="categories__img" />
+              <p className="categories__name">Fortnite</p>
+            </div>
+          </Link>
+        </div>
+        <div className="col-2 col-us-4">
+          <Link to="/category/Cyberpunk 2077">
+            <div className="categories__card">
+              <img src={cyberpunkImage} className="categories__img" />
+              <p className="categories__name">Cyberpunk 2077</p>
+            </div>
+          </Link>
+        </div>
+        <div className="col-2 col-us-4">
+          <Link to="/category/Among Us">
+            <div className="categories__card">
+              <img src={amongUsImage} className="categories__img" />
+              <p className="categories__name">Among Us</p>
+            </div>
+          </Link>
+        </div>
+        <div className="col-2 col-us-4">
+          <Link to="/category/League of Legends">
+            <div className="categories__card">
+              <img src={leagueOfLegendsImage} className="categories__img" />
+              <p className="categories__name">League of Legends</p>
+            </div>
+          </Link>
+        </div>
+        <div className="col-2 col-us-4">
+          <Link to="/category/VALORANT">
+            <div className="categories__card">
+              <img src={valorantImage} className="categories__img" />
+              <p className="categories__name">VALORANT</p>
+            </div>
+          </Link>
+        </div>
+        <div className="col-2 col-us-4">
+          <Link to="/category/Counter-Strike: Global Offensive">
+            <div className="categories__card">
+              <img src={csgoImage} className="categories__img" />
+              <p className="categories__name">Counter-Strike: Global Offensive</p>
+            </div>
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Categories;

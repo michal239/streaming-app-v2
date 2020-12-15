@@ -1,6 +1,5 @@
 .stream-card {
-  width: 100%;
-  
+  padding: 0 2% 5% 2%;
   .stream-card__thumbnail {
     width: 100%;
     position: relative;
@@ -51,10 +50,9 @@
     font-weight: bold;
     cursor: pointer;
     margin-bottom: 4px;
+    overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    overflow: hidden;
-    width: 100%;
     &:hover {
       color: var(--color-main-blue)
     }
