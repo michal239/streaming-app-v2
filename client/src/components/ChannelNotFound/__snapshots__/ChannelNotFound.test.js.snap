@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ChannelNotFound component matches snapshot 1`] = `
+<div>
+  <div
+    class="channel-not-found"
+  >
+    Channel - 
+    <span />
+     - does not exist ;(
+  </div>
+</div>
+`;

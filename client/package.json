@@ -6,6 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --config ./webpack.config.js --mode development",
     "build": "webpack",
+    "test": "jest",
     "format": "prettier --write \"./**/*.{ts,tsx}\""
   },
   "keywords": [],
@@ -33,6 +34,11 @@
     "videojs-hlsjs-plugin": "^1.0.5"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-react": "^7.12.10",
+    "@babel/preset-typescript": "^7.12.7",
+    "@testing-library/jest-dom": "^5.11.6",
+    "@testing-library/react": "^11.2.2",
     "@types/dplayer": "^1.25.0",
     "@types/hls.js": "^0.13.1",
     "@types/js-md5": "^0.4.2",
@@ -43,8 +49,11 @@
     "@types/react-router-dom": "^5.1.5",
     "@types/video.js": "^7.3.11",
     "@types/webpack": "^4.41.22",
+    "babel-jest": "^26.6.3",
     "css-loader": "^4.3.0",
+    "faker": "^5.1.0",
     "file-loader": "^6.1.1",
+    "jest": "^26.6.3",
     "module-alias": "^2.2.2",
     "node-sass": "^4.14.1",
     "prettier": "^2.1.2",
@@ -55,5 +64,10 @@
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less|sass|scss)$": "<rootDir>/src/tests/__mocks__/styleMock.ts"
+    }
   }
 }
