@@ -5,6 +5,11 @@ import RegisterForm from '../RegisterForm/RegisterForm';
 import AuthFormNavigation from '../AuthFormNavigation/AuthFormNavigation';
 import './AuthForm.scss';
 
+interface AuthFormProps {
+  closeModal: any,
+  displayMode: 'DISPLAY_REGISTER-FORM' | 'DISPLAY_LOGIN-FORM'
+}
+
 function reducer(state: any, action: any) {
   switch (action.type) {
     case 'DISPLAY_LOGIN-FORM':
@@ -16,8 +21,8 @@ function reducer(state: any, action: any) {
   }
 }
 
-const AuthForm: React.FC<any> = props => {
-  const [display, dispatch] = useReducer(reducer, 'DISPLAY_LOGIN-FORM');
+const AuthForm: React.FC<AuthFormProps> = props => {
+  const [display, dispatch] = useReducer(reducer, props.displayMode);
   const authForm = useRef(null);
   useClickOutside(authForm, () => {
     props.closeModal();

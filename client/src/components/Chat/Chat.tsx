@@ -79,7 +79,7 @@ const Chat: React.FC<ChatProps> = props => {
         {showAuthForm && (
           <ModalPortal>
             <Modal>
-              <AuthForm closeModal={() => setShowAuthForm(false)} />
+              <AuthForm closeModal={() => setShowAuthForm(false)} displayMode="DISPLAY_LOGIN-FORM" />
             </Modal>
           </ModalPortal>
         )}
