@@ -3,6 +3,9 @@
   .stream-card__thumbnail {
     width: 100%;
     position: relative;
+    &:hover {
+      box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    }
   }
   .inner {
     position: relative;
