@@ -6,12 +6,14 @@
   "scripts": {
     "start": "node src/index.js",
     "watch": "babel-watch -L src/index.js",
+    "build": "babel ./src --out-dir ./dist --source-maps --copy-files",
     "test": "jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/cli": "^7.12.10",
     "babel-watch": "^7.0.0",
     "faker": "^4.1.0"
   },

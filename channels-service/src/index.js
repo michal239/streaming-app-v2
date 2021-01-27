@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import database from './database-layer/models/Channel';
 import path from 'path'
-mongoose.connect('mongodb://localhost/channels-service', {
+mongoose.connect('mongodb://db/channels-service', {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   useCreateIndex: true
@@ -25,8 +25,8 @@ const services = {
   unsubscribeChannel: grpcCallback(unsubscribeChannel),
   findOne: grpcCallback(findOne)
 }
-const PROTO_PATH = path.resolve(__dirname, '../../_proto/channel.proto');
-const app = new App(PROTO_PATH, 'ChannelsService', { server: { PORT: 3001, API_KEY: 'api' } })
+const PROTO_PATH = path.resolve(__dirname, './_proto/channel.proto');
+const app = new App(PROTO_PATH, 'ChannelsService', { server: { PORT: 3000, API_KEY: 'api' } })
 app.initServices(services);
 app.start();
 

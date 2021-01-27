@@ -10,10 +10,10 @@ COPY . .
 
 RUN npm run build
 
-COPY ./_proto ./dist/_proto
-
 WORKDIR ./dist
 
-EXPOSE 7000
+COPY ./_proto ./_proto
+
+EXPOSE 3000
 
 CMD node ./index.js

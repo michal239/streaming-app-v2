@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+  api-gateway:
+    build: ./api-gateway
+    volumes:
+      - ./api-gateway:/usr/src/app
+    ports:
+      - 7000:7000
+
+  users-service:
+    build: './users-service'
+    volumes:
+      - ./users-service:/usr/src/app
+    depends_on:
+      - db
+    ports:
+      - 7001:3000
+
+  channels-service:
+    build: './channels-service'
+    volumes:
+      - ./channels-service:/usr/src/app
+    depends_on:
+      - db
+    ports:
+      - 7002:3000
+  
+  # streams-service:
+  #   build: './streams-service'
+  #   volumes:
+  #     - ./streams-service:/usr/src/app
+  #   ports:
+  #     - 7003:7003
+  
+  chat-service:
+    build: './chat-service'
+    volumes:
+      - ./chat-service:/usr/src/app
+    ports:
+      - 7004:3000
+  
+  # rtmp-server:
+  #   build: './rtmp-server'
+  #   volumes:
+  #     - ./rtmp-server:/usr/src/app
+  #   ports:
+  #     - 1935:1935
+  
+  db:
+    image: 'mongo'
+    ports:
+      - 27017:27017

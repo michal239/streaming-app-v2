@@ -3,7 +3,7 @@ import * as protoLoader from '@grpc/proto-loader';
 import { Stream } from '../../modules/stream/entity/Stream';
 
 
-const PROTO_PATH = __dirname + '../../../../../_proto/streams.proto';
+const PROTO_PATH = '/app/_proto/streams.proto';
 
 const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
   keepCase: true,
@@ -15,7 +15,7 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
 
 const streamProto: any = grpc.loadPackageDefinition(packageDefinition).streams;
 
-const StreamsClient = new streamProto.StreamsService('localhost:3005', grpc.credentials.createInsecure());
+const StreamsClient = new streamProto.StreamsService('streams-service:7003', grpc.credentials.createInsecure());
 
 function getStream(data: any): Promise<Stream | null> {
   return new Promise((resolve, reject) => {

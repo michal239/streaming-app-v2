@@ -9,7 +9,7 @@ import path from 'path';
 import App from './App';
 import { checkSource } from './middleware'
 import grpcCallback from './utils/grpcCallback';
-const PROTO_PATH = path.resolve(__dirname, '../../_proto/user.proto');
+const PROTO_PATH = path.resolve(__dirname, './_proto/user.proto');
 // const server = express();
 // server.use(bodyParser.json())
 // server.get('/', (req, res) => {

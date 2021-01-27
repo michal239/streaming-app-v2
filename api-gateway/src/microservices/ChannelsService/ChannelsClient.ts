@@ -6,7 +6,7 @@ import { Channel } from '../../modules/channel/entity/Channel'
 import { IMetadata } from '@ts/interfaces/Metadata.interface';
 import { RequestFailedError } from '../../utils/errors'
 
-const PROTO_PATH = __dirname + '../../../../../_proto/channel.proto';
+const PROTO_PATH = '/app/_proto/channel.proto';
 
 const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
   keepCase: true,
@@ -18,7 +18,7 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
 
 const channelProto: any = grpc.loadPackageDefinition(packageDefinition).channel;
 
-const ChannelsClient = new channelProto.ChannelsService('localhost:3001', grpc.credentials.createInsecure());
+const ChannelsClient = new channelProto.ChannelsService('channels-service:7001', grpc.credentials.createInsecure());
 
 function createChannel(data: ICreateChannelData, metadata?: IMetadata): Promise<Channel> {
   return new Promise((resolve, reject) => {

@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 export default function() {
-  mongoose.connect('mongodb://localhost/users-service', {
+  mongoose.connect('mongodb://db/users-service', {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true
