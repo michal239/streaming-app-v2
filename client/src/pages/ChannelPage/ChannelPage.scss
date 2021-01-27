@@ -1,6 +1,6 @@
 .channel-page {
   padding-top: 76px;
-
+  overflow-y: scroll;
   .channel-page__video-player-placeholder {
     height: 40vw;
     background-color: var(--color-main-dark);
