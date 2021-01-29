@@ -19,7 +19,7 @@ const rtmpDev = {
   //   secret: 'nodemedia2017privatekey'
   // },
   trans: {
-    ffmpeg: './ffmpeg/bin/ffmpeg.exe',
+    ffmpeg: '/usr/local/bin/ffmpeg',
     tasks: [
         {
             app: 'live',

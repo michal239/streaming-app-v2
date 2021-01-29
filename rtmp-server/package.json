@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "watch": "babel-watch -L src/index.js"
+    "watch": "babel-watch -L src/index.js",
+    "build": "babel ./src --out-dir ./dist --source-maps --copy-files"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +20,7 @@
     "node-media-server": "^2.2.2"
   },
   "devDependencies": {
+    "@babel/cli": "^7.12.10",
     "babel-watch": "^7.0.0"
   }
 }

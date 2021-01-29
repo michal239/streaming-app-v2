@@ -40,12 +40,13 @@ services:
     ports:
       - 7004:3000
   
-  # rtmp-server:
-  #   build: './rtmp-server'
-  #   volumes:
-  #     - ./rtmp-server:/usr/src/app
-  #   ports:
-  #     - 1935:1935
+  rtmp-server:
+    build: './rtmp-server'
+    volumes:
+      - ./rtmp-server:/usr/src/app
+    ports:
+      - 1935:1935
+      - 8888:8888
   
   db:
     image: 'mongo'
