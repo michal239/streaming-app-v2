@@ -18,7 +18,7 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
 
 const channelProto: any = grpc.loadPackageDefinition(packageDefinition).channel;
 
-const ChannelsClient = new channelProto.ChannelsService('channels-service:7001', grpc.credentials.createInsecure());
+const ChannelsClient = new channelProto.ChannelsService('channels-service:3000', grpc.credentials.createInsecure());
 
 function createChannel(data: ICreateChannelData, metadata?: IMetadata): Promise<Channel> {
   return new Promise((resolve, reject) => {

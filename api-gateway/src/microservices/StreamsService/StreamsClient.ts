@@ -15,7 +15,7 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
 
 const streamProto: any = grpc.loadPackageDefinition(packageDefinition).streams;
 
-const StreamsClient = new streamProto.StreamsService('streams-service:7003', grpc.credentials.createInsecure());
+const StreamsClient = new streamProto.StreamsService('streams-service:3000', grpc.credentials.createInsecure());
 
 function getStream(data: any): Promise<Stream | null> {
   return new Promise((resolve, reject) => {

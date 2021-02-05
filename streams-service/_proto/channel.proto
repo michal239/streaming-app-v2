@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package channel;
+
+import "common.proto";
+
+message channelRequest {
+  string userId = 1;
+  string channelId = 2;
+  string streamKey = 3;
+}
+message Channel {
+  string id = 1;
+  string userId = 2;
+  string streamKey = 3;
+  int32 views = 4;
+  Subscriptions subscriptions = 5;
+}
+message Subscriptions {
+  int32 count = 1;
+  repeated string subscribers = 2;
+}
+
+message channel {
+  string id = 1;
+  string userId = 2;
+  string streamKey = 3;
+  int32 views = 4;
+  Subscriptions subscriptions = 5;
+  common.Status status = 6;
+}
+
+message CreateChannelRequest {
+  string userId = 1;
+}
+message CreateChannelResponse {
+  Channel channel = 1;
+  common.Status status = 2;
+}
+
+message FindOneRequest {
+  string query = 1;
+}
+message FindOneResponse {
+  Channel channel = 1;
+  common.Status status = 2;
+}
+
+service ChannelsService {
+  rpc createChannel (CreateChannelRequest) returns (CreateChannelResponse);
+  rpc subscribeChannel (channelRequest) returns (channel);
+  rpc unsubscribeChannel (channelRequest) returns (channel);
+  rpc findOne (FindOneRequest) returns (FindOneResponse);
+}

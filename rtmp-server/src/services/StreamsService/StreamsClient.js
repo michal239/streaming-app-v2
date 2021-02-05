@@ -13,6 +13,6 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
 
 const channelProto = grpc.loadPackageDefinition(packageDefinition).streams;
 
-const StreamsClient = new channelProto.StreamsService('streams-service:7003', grpc.credentials.createInsecure());
+const StreamsClient = new channelProto.StreamsService('streams-service:3000', grpc.credentials.createInsecure());
 
 export default StreamsClient;

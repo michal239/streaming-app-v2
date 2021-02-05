@@ -22,7 +22,7 @@ const services = {
   getThumbnail
 }
 
-const PROTO_PATH = path.resolve(__dirname, './streams.proto');
-const app = new App(PROTO_PATH, 'StreamsService', { server: { PORT: 3005, API_KEY: 'api' } })
+const PROTO_PATH = path.resolve(__dirname, './_proto/streams.proto');
+const app = new App(PROTO_PATH, 'StreamsService', { server: { PORT: 3000, API_KEY: 'api' } })
 app.initServices(services);
 app.start();

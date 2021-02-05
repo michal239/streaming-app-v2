@@ -26,12 +26,14 @@ services:
     ports:
       - 7002:3000
   
-  # streams-service:
-  #   build: './streams-service'
-  #   volumes:
-  #     - ./streams-service:/usr/src/app
-  #   ports:
-  #     - 7003:7003
+  streams-service:
+    build: './streams-service'
+    volumes:
+      - ./streams-service:/usr/src/app
+    depends_on:
+    - redis
+    ports:
+      - 7003:3000
   
   chat-service:
     build: './chat-service'
@@ -52,3 +54,8 @@ services:
     image: 'mongo'
     ports:
       - 27017:27017
+  
+  redis:
+    image: 'redis'
+    ports:
+      - 6379:6379

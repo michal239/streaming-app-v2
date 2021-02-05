@@ -7,7 +7,7 @@ const job = new CronJob('0/5 * * * * *', function() {
 }, null, true, 'America/Los_Angeles');
 
 function updateViewers() {
-  request('http://localhost:8888/api/streams', function(error, response, body) {
+  request('http://rtmp-server:8888/api/streams', function(error, response, body) {
     if (error) return;
     const streams = JSON.parse(body).live;
 

@@ -28,7 +28,8 @@ WORKDIR ./dist
 
 COPY ./_proto ./_proto
 
-EXPOSE 1935
-EXPOSE 8888
+COPY ./thumbnails ./thumbnails
+
+EXPOSE 3000
 
 CMD node ./index.js
