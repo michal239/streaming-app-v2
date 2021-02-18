@@ -23,6 +23,6 @@ const services = {
 }
 
 const PROTO_PATH = path.resolve(__dirname, './_proto/streams.proto');
-const app = new App(PROTO_PATH, 'StreamsService', { server: { PORT: 3000, API_KEY: 'api' } })
+const app = new App(PROTO_PATH, 'StreamsService', { server: { PORT: 3000, API_KEY: process.env.STREAMS_SERVICE_API_KEY } })
 app.initServices(services);
 app.start();

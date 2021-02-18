@@ -22,12 +22,12 @@ const rtmpDev = {
     ffmpeg: '/usr/local/bin/ffmpeg',
     tasks: [
         {
-            app: 'live',
-            hls: true,
+          app: 'live',
+          hls: true,
             
-            dash: true,
-            dashFlags: '[f=dash:window_size=3:extra_window_size=5]',
-            flv: true
+          dash: true,
+          dashFlags: '[f=dash:window_size=3:extra_window_size=5]',
+          flv: true
         }
     ]
   }

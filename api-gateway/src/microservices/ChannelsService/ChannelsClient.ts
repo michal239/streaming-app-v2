@@ -52,7 +52,7 @@ function findOne(data: IFindOneData, metadata?: IMetadata): Promise<Channel | nu
 
 function generateMetadata(metadata?: IMetadata) {
   const meta = new grpc.Metadata();
-  meta.add('x-api-key', 'replacethislater');
+  meta.add('x-api-key', process.env.CHANNELS_SERVICE_API_KEY || '');
   if (metadata) {
     for (let key in metadata) {
       meta.add(key, metadata[key]);

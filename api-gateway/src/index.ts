@@ -21,7 +21,7 @@ const main = async () => {
   const app = express();
 
   app.use(cors({
-    origin: 'http://localhost:8000',
+    origin: process.env.HOST_IP,
     credentials: true
   }));
   
@@ -31,7 +31,7 @@ const main = async () => {
     const token = req.cookies['token'];
     if (token) {
       try {
-        const verified = jwt.verify(token, 'sdw12dsa');
+        const verified = jwt.verify(token, process.env.JWT_SECRET || '');
         req.user = verified;
       } catch (err) {
         res.clearCookie('token');

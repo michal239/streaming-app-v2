@@ -5,6 +5,8 @@ services:
     build: ./api-gateway
     volumes:
       - ./api-gateway:/usr/src/app
+    env_file:
+      - .env
     ports:
       - 7000:7000
 
@@ -14,6 +16,8 @@ services:
       - ./users-service:/usr/src/app
     depends_on:
       - db
+    env_file:
+      - .env
     ports:
       - 7001:3000
 
@@ -23,6 +27,8 @@ services:
       - ./channels-service:/usr/src/app
     depends_on:
       - db
+    env_file:
+      - .env
     ports:
       - 7002:3000
   
@@ -31,7 +37,9 @@ services:
     volumes:
       - ./streams-service:/usr/src/app
     depends_on:
-    - redis
+      - redis
+    env_file:
+      - .env
     ports:
       - 7003:3000
   
@@ -52,10 +60,9 @@ services:
   
   db:
     image: 'mongo'
+    command: [--auth]
     ports:
       - 27017:27017
   
   redis:
     image: 'redis'
-    ports:
-      - 6379:6379

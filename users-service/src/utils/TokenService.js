@@ -1,6 +1,4 @@
 import jwt from 'jsonwebtoken';
-import config from '../config';
-
 
 class TokenService {
   constructor(secret) {
@@ -13,4 +11,4 @@ class TokenService {
 
 }
 
-export default new TokenService(config.JWT_SECRET);
+export default new TokenService(process.env.JWT_SECRET);

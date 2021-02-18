@@ -97,7 +97,7 @@ function findOne(data: any, metadata?: IMetadata): Promise<User | null> {
 
 function generateMetadata(metadata?: IMetadata) {
   const meta = new grpc.Metadata();
-  meta.add('x-api-key', 'replacethislater');
+  meta.add('x-api-key', process.env.USERS_SERVICE_API_KEY || '');
   if (metadata) {
     for (let key in metadata) {
       meta.add(key, metadata[key]);

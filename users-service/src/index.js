@@ -1,22 +1,18 @@
-require('dotenv').config()
-// import express from 'express';
-
-import setupDatabase from './setup/setupDatabase';
-import { registerUser, loginUser, find, findOne, findById, findRegexp } from './controllers';
-// import makeCallback from './helpers/express-callback';
-// import bodyParser from 'body-parser';
+import mongoose from 'mongoose';
 import path from 'path';
 import App from './App';
-import { checkSource } from './middleware'
 import grpcCallback from './utils/grpcCallback';
-const PROTO_PATH = path.resolve(__dirname, './_proto/user.proto');
-// const server = express();
-// server.use(bodyParser.json())
-// server.get('/', (req, res) => {
-//   
-// })
-// server.post('/user', makeCallback(registerUser))
-// server.post('/login', makeCallback(loginUser));
+import { checkSource } from './middleware'
+import { registerUser, loginUser, find, findOne, findById, findRegexp } from './controllers';
+
+mongoose.connect(`mongodb://${process.env.USERS_SERVICE_DB_USERNAME}:${process.env.USERS_SERVICE_DB_PASSWORD}@db/users-service`, {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useCreateIndex: true
+}, (error) => {
+  console.log(error ? error : 'Connected to the database')
+});
+
 const services = {
   login: grpcCallback(loginUser),
   register: grpcCallback(registerUser),
@@ -25,8 +21,10 @@ const services = {
   findById: grpcCallback(findById),
   findRegexp: grpcCallback(findRegexp)
 }
-const app = new App(PROTO_PATH, 'UsersService', { server: { PORT: 3000, API_KEY: 'api' } });
+const PROTO_PATH = path.resolve(__dirname, './_proto/user.proto');
+const app = new App(PROTO_PATH, 'UsersService', { server: { PORT: 3000, API_KEY: process.env.USERS_SERVICE_API_KEY } });
+
 app.initMiddleware(checkSource);
 app.initServices(services);
 app.start();
-setupDatabase();
+
