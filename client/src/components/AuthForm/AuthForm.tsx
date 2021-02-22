@@ -6,8 +6,8 @@ import AuthFormNavigation from '../AuthFormNavigation/AuthFormNavigation';
 import './AuthForm.scss';
 
 interface AuthFormProps {
-  closeModal: any,
-  displayMode: 'DISPLAY_REGISTER-FORM' | 'DISPLAY_LOGIN-FORM'
+  closeModal: any;
+  displayMode: 'DISPLAY_REGISTER-FORM' | 'DISPLAY_LOGIN-FORM';
 }
 
 function reducer(state: any, action: any) {
@@ -34,11 +34,11 @@ const AuthForm: React.FC<AuthFormProps> = props => {
         <div className="col-lg-2 col-bg-3 col-md-4 col-sm-6 col-xs-9 col-us-12">
           <div ref={authForm} className="auth-form">
             <i className="fas fa-times auth-form__close-icon" onClick={props.closeModal}></i>
-            <AuthFormNavigation dispatch={dispatch} display={display}/>
+            <AuthFormNavigation dispatch={dispatch} display={display} />
             {display === 'DISPLAY_LOGIN-FORM' ? (
               <LoginForm closeModal={props.closeModal} />
             ) : (
-              <RegisterForm />
+              <RegisterForm closeModal={props.closeModal} />
             )}
           </div>
         </div>

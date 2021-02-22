@@ -7,9 +7,19 @@ interface AuthFormNavigationProps {
 
 const AuthFormNavigation: React.FC<AuthFormNavigationProps> = ({ dispatch, display }) => {
   return (
-    <div style={{ display: 'flex', borderBottom: '1px solid rgba(0, 0, 0, 0.1)'}}>
-      <button className={'auth-form__nav-btn ' + (display === 'DISPLAY_LOGIN-FORM' ? 'active' : '')} onClick={() => dispatch({ type: 'DISPLAY_LOGIN-FORM' })}>Login</button>
-      <button className={'auth-form__nav-btn ' + (display === 'DISPLAY_REGISTER-FORM' ? 'active' : '')} onClick={() => dispatch({ type: 'DISPLAY_REGISTER-FORM' })}>Register</button>
+    <div style={{ display: 'flex', borderBottom: '1px solid rgba(0, 0, 0, 0.1)' }}>
+      <button
+        className={'auth-form__nav-btn ' + (display === 'DISPLAY_LOGIN-FORM' ? 'active' : '')}
+        onClick={() => dispatch({ type: 'DISPLAY_LOGIN-FORM' })}
+      >
+        Login
+      </button>
+      <button
+        className={'auth-form__nav-btn ' + (display === 'DISPLAY_REGISTER-FORM' ? 'active' : '')}
+        onClick={() => dispatch({ type: 'DISPLAY_REGISTER-FORM' })}
+      >
+        Register
+      </button>
     </div>
   );
 };

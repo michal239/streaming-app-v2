@@ -20,7 +20,7 @@ const Categories: React.FC = () => {
     <div className="container categories">
       <h2>Popular categories</h2>
       <div className="row">
-        <div className="col-2 col-us-4">
+        <div className="col-lg-1 col-bg-2 col-md-3 col-us-6">
           <Link to="/category/Fortnite">
             <div className="categories__card">
               <img src={fortniteImage} className="categories__img" />
@@ -28,7 +28,7 @@ const Categories: React.FC = () => {
             </div>
           </Link>
         </div>
-        <div className="col-2 col-us-4">
+        <div className="col-lg-1 col-bg-2 col-md-3 col-us-6">
           <Link to="/category/Cyberpunk 2077">
             <div className="categories__card">
               <img src={cyberpunkImage} className="categories__img" />
@@ -36,7 +36,7 @@ const Categories: React.FC = () => {
             </div>
           </Link>
         </div>
-        <div className="col-2 col-us-4">
+        <div className="col-lg-1 col-bg-2 col-md-3 col-us-6">
           <Link to="/category/Among Us">
             <div className="categories__card">
               <img src={amongUsImage} className="categories__img" />
@@ -44,7 +44,7 @@ const Categories: React.FC = () => {
             </div>
           </Link>
         </div>
-        <div className="col-2 col-us-4">
+        <div className="col-lg-1 col-bg-2 col-md-3 col-us-6">
           <Link to="/category/League of Legends">
             <div className="categories__card">
               <img src={leagueOfLegendsImage} className="categories__img" />
@@ -52,7 +52,7 @@ const Categories: React.FC = () => {
             </div>
           </Link>
         </div>
-        <div className="col-2 col-us-4">
+        <div className="col-lg-1 col-bg-2 col-md-3 col-us-6">
           <Link to="/category/VALORANT">
             <div className="categories__card">
               <img src={valorantImage} className="categories__img" />
@@ -60,7 +60,7 @@ const Categories: React.FC = () => {
             </div>
           </Link>
         </div>
-        <div className="col-2 col-us-4">
+        <div className="col-lg-1 col-bg-2 col-md-3 col-us-6">
           <Link to="/category/Counter-Strike: Global Offensive">
             <div className="categories__card">
               <img src={csgoImage} className="categories__img" />

@@ -28,6 +28,7 @@
   .auth-form__error-msg {
     // padding: 4px 10px;
     color: orangered;
+    margin-top: 10px;
     // background: lightcoral;
     // border: 2px solid red;
     // border-radius: 4px;
@@ -78,6 +79,20 @@
       background-color: white;
       // transition: 0.25s;
     }
+  }
+
+  .auth-form__field--error {
+    border-color: red;
+    background-color: #ebaeae;
+    &:focus {
+      border-color: red;
+      // background-color: #fab1a0;
+    }
+  }
+
+  .auth-form__field-error {
+    color: red;
+    margin-top: 4px;
   }
 
   .auth-form__nav-btn {

@@ -21,7 +21,7 @@ const main = async () => {
   const app = express();
 
   app.use(cors({
-    origin: process.env.HOST_IP,
+    origin: 'http://' + process.env.HOST_IP,
     credentials: true
   }));
   

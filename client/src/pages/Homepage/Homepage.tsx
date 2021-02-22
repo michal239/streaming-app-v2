@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery, gql } from '@apollo/client';
 
-import { ClipLoader } from 'react-spinners'
+import { ClipLoader } from 'react-spinners';
 import StreamCard from '../../components/StreamCard/StreamCard';
 import Categories from './Categories';
 
@@ -23,7 +23,12 @@ const GET_STREAMS = gql`
 const Homepage = () => {
   const { data, loading } = useQuery(GET_STREAMS);
 
-  if (loading) return <div style={{ width: '100vw', height: '100vh' }} className="flex-center"><ClipLoader /></div>;
+  if (loading)
+    return (
+      <div style={{ width: '100vw', height: '100vh' }} className="flex-center">
+        <ClipLoader />
+      </div>
+    );
 
   return (
     <div style={{ marginTop: '100px' }}>

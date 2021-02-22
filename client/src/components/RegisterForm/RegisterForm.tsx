@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from '../../hooks/useForm';
-import { gql, useLazyQuery } from '@apollo/client';
-import AvailabilityMarker from './AvailabilityMarker';
+import { gql, useMutation } from '@apollo/client';
 import { connect } from 'react-redux';
 import validate from '../../utils/registerValidation';
+import ClipLoader from 'react-spinners/ClipLoader';
 
-const GET_USER = gql`
-  query user($key: String!, $value: String!) {
-    user(key: $key, value: $value) {
+const REGISTER_USER = gql`
+  mutation register($username: String!, $email: String!, $password: String!) {
+    register(username: $username, email: $email, password: $password) {
       id
-      username
     }
   }
 `;
-const RegisterForm: React.FC = () => {
+
+const RegisterForm: React.FC<any> = ({ closeModal }) => {
   const [inputFields, setInputFields] = useForm({
     username: { value: '', touched: false },
     email: { value: '', touched: false },
@@ -25,102 +25,114 @@ const RegisterForm: React.FC = () => {
     email: '',
     password: '',
   });
-  const [checkUser, { loading: userLoading, data: usernameData }] = useLazyQuery(GET_USER);
-  const [checkEmail, { loading: emailLoading, data: emailData }] = useLazyQuery(GET_USER);
+  const [fetchingError, setFetchingError] = useState('');
+  const [registerMutation, { loading }] = useMutation(REGISTER_USER);
 
-  useEffect(() => {
-    if (!inputFields.username.touched) return;
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
     try {
       validate.username(inputFields.username.value);
-      setFieldErrors({ ...fieldErrors, username: '' });
+      setFieldErrors(state => ({ ...state, username: '' }));
     } catch (error) {
-      setFieldErrors({ ...fieldErrors, username: error.message });
+      setFieldErrors(state => ({ ...state, username: error.message }));
     }
-    const timer = setTimeout(() => {
-      checkUser({ variables: { key: 'username', value: inputFields.username.value } });
-    }, 1000);
+    try {
+      validate.email(inputFields.email.value);
+      setFieldErrors(state => ({ ...state, email: '' }));
+    } catch (error) {
+      setFieldErrors(state => ({ ...state, email: error.message }));
+    }
+    try {
+      validate.password(inputFields.password.value);
+      setFieldErrors(state => ({ ...state, password: '' }));
+    } catch (error) {
+      setFieldErrors(state => ({ ...state, password: error.message }));
+    }
 
-    return () => clearTimeout(timer);
+    try {
+      validate.username(inputFields.username.value);
+      validate.email(inputFields.email.value);
+      validate.password(inputFields.password.value);
+      await register();
+    } catch (error) {}
+  };
+
+  const register = async () => {
+    try {
+      await registerMutation({
+        variables: {
+          username: inputFields.username.value,
+          email: inputFields.email.value,
+          password: inputFields.password.value,
+        },
+      });
+      closeModal();
+    } catch (error) {
+      setFetchingError(error.message);
+    }
+  };
+
+  useEffect(() => {
+    setFieldErrors(state => ({ ...state, username: '' }));
   }, [inputFields.username.value]);
 
   useEffect(() => {
-    if (!inputFields.email.touched || !fieldErrors.email) return;
-    const timer = setTimeout(() => {
-      checkEmail({ variables: { key: 'email', value: inputFields.email.value } });
-    }, 1000);
-
-    return () => clearTimeout(timer);
+    setFieldErrors(state => ({ ...state, email: '' }));
   }, [inputFields.email.value]);
 
   useEffect(() => {
-    if (userLoading) return;
-    if (usernameData === undefined) return;
-    const msg = usernameData.user ? 'username zajęty' : 'usernamy wolny';
-    console.log(msg);
-  }, [usernameData]);
+    setFieldErrors(state => ({ ...state, password: '' }));
+  }, [inputFields.password.value]);
 
-  useEffect(() => {
-    if (emailLoading) return;
-    if (emailData === undefined) return;
-    const msg = emailData.user ? 'email zajęty' : 'email wolny';
-    console.log(msg);
-  }, [emailData]);
-
-  // function handleChange(e: any) {
-  // checkUser({ variables: { key: 'username', value: e.target.value } })
-  // console.log(data)
-  // }
+  if (loading) {
+    return (
+      <div className="auth-form__loading-spinner">
+        <ClipLoader />
+      </div>
+    );
+  }
 
   return (
-    <form className="auth-form__form">
+    <form className="auth-form__form" onSubmit={handleSubmit}>
+      {fetchingError && <div className="auth-form__error-msg">{fetchingError}</div>}
       <div className="auth-form__field-wrapper">
         <div className="auth-form__label">
           <label htmlFor="">Username</label>
-          {inputFields.username.touched && (
-            <AvailabilityMarker
-              loading={userLoading}
-              success={usernameData ? !usernameData.user : false}
-            />
-          )}
         </div>
         <input
-          className="auth-form__field"
+          className={'auth-form__field' + (fieldErrors.username && ' auth-form__field--error')}
           type="text"
           name="username"
           value={inputFields.username.value}
           onChange={setInputFields}
         />
-        <div>{fieldErrors.username}</div>
+        <div className="auth-form__field-error">{fieldErrors.username}</div>
       </div>
       <div className="auth-form__field-wrapper">
         <div className="auth-form__label">
           <label htmlFor="">Email</label>
-          {inputFields.email.touched && (
-            <AvailabilityMarker
-              loading={emailLoading}
-              success={emailData ? !emailData.user : false}
-            />
-          )}
         </div>
         <input
-          className="auth-form__field"
+          className={'auth-form__field' + (fieldErrors.email && ' auth-form__field--error')}
           type="text"
           name="email"
           value={inputFields.email.value}
           onChange={setInputFields}
         />
+        <div className="auth-form__field-error">{fieldErrors.email}</div>
       </div>
       <div className="auth-form__field-wrapper">
         <div className="auth-form__label">
           <label htmlFor="">Password</label>
         </div>
         <input
-          className="auth-form__field"
+          className={'auth-form__field' + (fieldErrors.password && ' auth-form__field--error')}
           type="password"
           name="password"
           value={inputFields.password.value}
           onChange={setInputFields}
         />
+        <div className="auth-form__field-error">{fieldErrors.password}</div>
       </div>
       <div className="auth-form__field-wrapper">
         <button className="auth-form__submit-btn">Register</button>

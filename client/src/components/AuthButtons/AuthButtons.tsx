@@ -5,7 +5,9 @@ import AuthForm from '../AuthForm/AuthForm';
 
 const AuthButtons: React.FC = () => {
   const [showAuthForm, setShowAuthForm] = useState(false);
-  const [displayMode, setDisplayMode] = useState<'DISPLAY_LOGIN-FORM' | 'DISPLAY_REGISTER-FORM'>('DISPLAY_LOGIN-FORM')
+  const [displayMode, setDisplayMode] = useState<'DISPLAY_LOGIN-FORM' | 'DISPLAY_REGISTER-FORM'>(
+    'DISPLAY_LOGIN-FORM',
+  );
   return (
     <div>
       {showAuthForm && (
@@ -25,7 +27,8 @@ const AuthButtons: React.FC = () => {
       >
         Login
       </button>
-      <button className="navbar__button navbar__button--bold"
+      <button
+        className="navbar__button navbar__button--bold"
         onClick={() => {
           setDisplayMode('DISPLAY_REGISTER-FORM');
           setShowAuthForm(currentState => !currentState);

@@ -4,7 +4,6 @@ import { useMutation } from '@apollo/client';
 import { useForm } from '../../hooks/useForm';
 import { loginUser } from '../../store/actions/currentUser';
 import ClipLoader from 'react-spinners/ClipLoader';
-// import { setCookie } from '../../utils/cookies';
 import { LOGIN_USER } from '../../graphql';
 
 const LoginForm: React.FC<any> = ({ loginUser, closeModal }) => {
