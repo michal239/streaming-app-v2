@@ -14,7 +14,7 @@ const StreamCard: React.FC<StreamCardProps> = props => {
 
   return (
     <div className="stream-card">
-      <Link to={username}>
+      <Link to={'/' + username}>
         <div className="inner">
           <img
             src={`data:image/png;base64,${thumbnail}`}
@@ -28,16 +28,16 @@ const StreamCard: React.FC<StreamCardProps> = props => {
         </div>
       </Link>
       <div className="stream-card__description">
-        <Link to={username}>
+        <Link to={'/' + username}>
           <img className="stream-card__user-avatar" src={avatar} />
         </Link>
         <div style={{ width: '80%' }}>
-          <Link to={username}>
+          <Link to={'/' + username}>
             <div className="stream-card__title" title={title}>
               {title}
             </div>
           </Link>
-          <Link to={username}>
+          <Link to={'/' + username}>
             <div className="stream-card__username">{username}</div>
           </Link>
           <Link to={'/category/' + category}>

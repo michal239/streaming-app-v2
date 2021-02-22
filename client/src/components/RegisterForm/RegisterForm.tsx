@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from '../../hooks/useForm';
 import { gql, useMutation } from '@apollo/client';
-import { connect } from 'react-redux';
 import validate from '../../utils/registerValidation';
 import ClipLoader from 'react-spinners/ClipLoader';
 
@@ -141,15 +140,4 @@ const RegisterForm: React.FC<any> = ({ closeModal }) => {
   );
 };
 
-const mapDispatchToProps = () => {
-  return {
-    handleLogin(user: any) {
-      return {
-        action: 'LOG_IN',
-        user,
-      };
-    },
-  };
-};
-
-export default connect(null, mapDispatchToProps)(RegisterForm);
+export default RegisterForm;

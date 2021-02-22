@@ -1,5 +1,7 @@
 import React from 'react';
 import { gql, useQuery } from '@apollo/client';
+import StreamCard from '../../components/StreamCard/StreamCard';
+
 const GET_STREAMS = gql`
   query streams {
     streams {
@@ -21,12 +23,31 @@ const Category: React.FC<any> = props => {
   const { data } = useQuery(GET_STREAMS);
   if (data) {
     return (
-      <div>
-        {data.streams
-          .filter((stream: any) => stream.category === categoryName)
-          .map((stream: any) => {
-            return <h2>{stream.user.username}</h2>;
-          })}
+      <div style={{ marginTop: '100px' }}>
+        <div className="container">
+          {data.streams.filter((stream: any) => stream.category === categoryName).length === 0 ? (
+            <h2 style={{ marginLeft: '10px' }}>
+              Currently no one is streaming{' '}
+              <span style={{ color: 'var(--color-main-blue)' }}>{categoryName}</span>
+            </h2>
+          ) : (
+            <h2 style={{ marginLeft: '10px' }}>
+              Live channels streaming{' '}
+              <span style={{ color: 'var(--color-main-blue)' }}>{categoryName}</span>
+            </h2>
+          )}
+          <div className="row">
+            {data.streams
+              .filter((stream: any) => stream.category === categoryName)
+              .map((stream: any) => {
+                return (
+                  <div className="col-3 col-sm-6" key={stream.user.username}>
+                    <StreamCard stream={stream} />
+                  </div>
+                );
+              })}
+          </div>
+        </div>
       </div>
     );
   }
