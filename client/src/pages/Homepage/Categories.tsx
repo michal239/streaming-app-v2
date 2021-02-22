@@ -3,17 +3,17 @@ import { Link } from 'react-router-dom';
 import './Categories.scss';
 
 //@ts-ignore
-import amongUsImage from '../../../public/Among_Us.jpg';
+import amongUsImage from '../../../dist/Among_Us.jpg';
 //@ts-ignore
-import cyberpunkImage from '../../../public/Cyberpunk_2077.jpg';
+import cyberpunkImage from '../../../dist/Cyberpunk_2077.jpg';
 //@ts-ignore
-import valorantImage from '../../../public/VALORANT.jpg';
+import valorantImage from '../../../dist/VALORANT.jpg';
 //@ts-ignore
-import csgoImage from '../../../public/Counter-Strike_Global_Offensive.jpg';
+import csgoImage from '../../../dist/Counter-Strike_Global_Offensive.jpg';
 //@ts-ignore
-import leagueOfLegendsImage from '../../../public/League_Of_Legends.jpg';
+import leagueOfLegendsImage from '../../../dist/League_Of_Legends.jpg';
 //@ts-ignore
-import fortniteImage from '../../../public/Fortnite.jpg';
+import fortniteImage from '../../../dist/Fortnite.jpg';
 
 const Categories: React.FC = () => {
   return (

@@ -3,7 +3,7 @@ import SubscribeButton from '../SubscribeButton/SubscribeButton';
 import { Link } from 'react-router-dom';
 
 //@ts-ignore
-import avatar from '../../../public/userAvatar.png';
+import avatar from '../../../dist/userAvatar.png';
 import './ChannelInfo.scss';
 
 interface TimerProps {

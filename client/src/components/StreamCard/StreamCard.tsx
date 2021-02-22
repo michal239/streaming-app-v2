@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './StreamCard.scss';
 //@ts-ignore
-import avatar from '../../../public/userAvatar.png';
+import avatar from '../../../dist/userAvatar.png';
 
 interface StreamCardProps {
   stream: any;

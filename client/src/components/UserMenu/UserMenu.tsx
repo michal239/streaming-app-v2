@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import ModalPortal from '../ModalPortal/ModalPortal';
 //@ts-ignore
-import avatar from '../../../public/userAvatar.png';
+import avatar from '../../../dist/userAvatar.png';
 import { useClickOutside } from '../../hooks/useClickOutside';
 import { logoutUser } from '../../store/actions/currentUser';
 import './UserMenu.scss';

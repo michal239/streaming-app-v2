@@ -4,7 +4,7 @@ import { useClickOutside } from '../../hooks/useClickOutside';
 
 import ModalPortal from '../ModalPortal/ModalPortal';
 //@ts-ignore
-import avatar from '../../../public/userAvatar.png';
+import avatar from '../../../dist/userAvatar.png';
 import './SearchResultDropdown.scss';
 
 interface SearchResultDropdownProps {
