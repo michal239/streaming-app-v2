@@ -20,7 +20,7 @@
     "grpc-errors": "^1.1.4",
     "mali": "^0.21.0",
     "mongoose": "^5.9.19",
-    "nanoid": "^3.1.10"
+    "nanoid": "^3.1.31"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.10",
